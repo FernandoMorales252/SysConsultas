@@ -184,6 +184,8 @@ public class UserDAO {
         return userAuthenticate;
     }
 
+
+
     // Actualizar la contraseña de un usuario
     public boolean updatePassword(User user) throws SQLException {
         boolean res = false;
@@ -203,4 +205,6 @@ public class UserDAO {
         }
         return res;
     }
+
+    // Método para cerrar la conexión (opcional, si se desea liberar recursos manualmente)
 }
