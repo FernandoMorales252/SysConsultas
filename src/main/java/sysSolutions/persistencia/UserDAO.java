@@ -38,7 +38,7 @@ public class UserDAO {
                     int idGenerado = generatedKeys.getInt(1);
                     res = getById(idGenerado); // Se devuelve el usuario completo desde BD
                 } else {
-                    throw new SQLException("Creating user failed, no ID obtained.");
+                    throw new SQLException("la creacion fallo, no se obtuvo el ID.");
                 }
             }
 
@@ -55,7 +55,8 @@ public class UserDAO {
     // Actualiza los datos de un usuario (excepto la contraseña)
     public boolean update(User user) throws SQLException {
         boolean res = false;
-        try {
+        try
+        {
             ps = conn.connect().prepareStatement(
                     "UPDATE users SET name = ?, email = ?, status = ? WHERE id = ?"
             );
