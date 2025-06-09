@@ -1,17 +1,17 @@
 package sysSolutions.dominio;
 
-public class user {
+public class User {
     private int id;
     private String name;
     private String email;
     private String passwordHash;
     private byte status;
 
-    public user(){
+    public User(){
 
     }
 
-    public user(int id, String name, String email, String passwordHash, byte status) {
+    public User(int id, String name, String email, String passwordHash, byte status) {
         this.id = id;
         this.name = name;
         this.email = email;
