@@ -22,8 +22,8 @@ public class PacienteDAO {
         try {
             ps = conn.connect().prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, paciente.getNombre());
-            ps.setObject(2, paciente.getEdad(), java.sql.Types.INTEGER); // Para permitir null
-            ps.setObject(3, paciente.getSexo(), java.sql.Types.CHAR);    // Para permitir null
+            ps.setObject(2, paciente.getEdad(), java.sql.Types.INTEGER);
+            ps.setString(3, paciente.getSexo() != null ? paciente.getSexo().toString() : null); // <- CAMBIO
             ps.setString(4, paciente.getContacto());
             ps.setString(5, paciente.getDireccion());
 
@@ -36,7 +36,7 @@ public class PacienteDAO {
             generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {
                 int idGenerado = generatedKeys.getInt(1);
-                res = getById(idGenerado); // Recupera el paciente completo por su ID
+                res = getById(idGenerado);
             } else {
                 throw new SQLException("La creación del paciente falló, no se obtuvo el ID generado.");
             }
@@ -44,13 +44,9 @@ public class PacienteDAO {
         } catch (SQLException ex) {
             throw new SQLException("Error al crear el paciente: " + ex.getMessage(), ex);
         } finally {
-            if (generatedKeys != null) {
-                try { generatedKeys.close(); } catch (SQLException e) { /* log error */ }
-            }
-            if (ps != null) {
-                try { ps.close(); } catch (SQLException e) { /* log error */ }
-            }
-            try { conn.disconnect(); } catch (SQLException e) { /* log error */ }
+            if (generatedKeys != null) try { generatedKeys.close(); } catch (SQLException ignored) {}
+            if (ps != null) try { ps.close(); } catch (SQLException ignored) {}
+            try { conn.disconnect(); } catch (SQLException ignored) {}
         }
         return res;
     }
@@ -66,7 +62,7 @@ public class PacienteDAO {
 
             ps.setString(1, paciente.getNombre());
             ps.setObject(2, paciente.getEdad(), java.sql.Types.INTEGER);
-            ps.setObject(3, paciente.getSexo(), java.sql.Types.CHAR);
+            ps.setString(3, paciente.getSexo() != null ? paciente.getSexo().toString() : null); // <- CAMBIO
             ps.setString(4, paciente.getContacto());
             ps.setString(5, paciente.getDireccion());
             ps.setInt(6, paciente.getId());
@@ -76,10 +72,8 @@ public class PacienteDAO {
         } catch (SQLException ex) {
             throw new SQLException("Error al actualizar el paciente: " + ex.getMessage(), ex);
         } finally {
-            if (ps != null) {
-                try { ps.close(); } catch (SQLException e) { /* log error */ }
-            }
-            try { conn.disconnect(); } catch (SQLException e) { /* log error */ }
+            if (ps != null) try { ps.close(); } catch (SQLException ignored) {}
+            try { conn.disconnect(); } catch (SQLException ignored) {}
         }
         return res;
     }
@@ -99,10 +93,8 @@ public class PacienteDAO {
         } catch (SQLException ex) {
             throw new SQLException("Error al eliminar el paciente: " + ex.getMessage(), ex);
         } finally {
-            if (ps != null) {
-                try { ps.close(); } catch (SQLException e) { /* log error */ }
-            }
-            try { conn.disconnect(); } catch (SQLException e) { /* log error */ }
+            if (ps != null) try { ps.close(); } catch (SQLException ignored) {}
+            try { conn.disconnect(); } catch (SQLException ignored) {}
         }
         return res;
     }
@@ -122,7 +114,6 @@ public class PacienteDAO {
                 Paciente paciente = new Paciente();
                 paciente.setId(rs.getInt("id"));
                 paciente.setNombre(rs.getString("nombre"));
-                // Los campos Integer y Character pueden ser null en la base de datos
                 paciente.setEdad(rs.getObject("edad", Integer.class));
                 String sexoStr = rs.getString("sexo");
                 paciente.setSexo(sexoStr != null && !sexoStr.isEmpty() ? sexoStr.charAt(0) : null);
@@ -134,13 +125,9 @@ public class PacienteDAO {
         } catch (SQLException ex) {
             throw new SQLException("Error al obtener todos los pacientes: " + ex.getMessage(), ex);
         } finally {
-            if (rs != null) {
-                try { rs.close(); } catch (SQLException e) { /* log error */ }
-            }
-            if (ps != null) {
-                try { ps.close(); } catch (SQLException e) { /* log error */ }
-            }
-            try { conn.disconnect(); } catch (SQLException e) { /* log error */ }
+            if (rs != null) try { rs.close(); } catch (SQLException ignored) {}
+            if (ps != null) try { ps.close(); } catch (SQLException ignored) {}
+            try { conn.disconnect(); } catch (SQLException ignored) {}
         }
         return pacientes;
     }
@@ -172,13 +159,9 @@ public class PacienteDAO {
         } catch (SQLException ex) {
             throw new SQLException("Error al buscar pacientes: " + ex.getMessage(), ex);
         } finally {
-            if (rs != null) {
-                try { rs.close(); } catch (SQLException e) { /* log error */ }
-            }
-            if (ps != null) {
-                try { ps.close(); } catch (SQLException e) { /* log error */ }
-            }
-            try { conn.disconnect(); } catch (SQLException e) { /* log error */ }
+            if (rs != null) try { rs.close(); } catch (SQLException ignored) {}
+            if (ps != null) try { ps.close(); } catch (SQLException ignored) {}
+            try { conn.disconnect(); } catch (SQLException ignored) {}
         }
         return pacientes;
     }
@@ -209,13 +192,9 @@ public class PacienteDAO {
         } catch (SQLException ex) {
             throw new SQLException("Error al obtener el paciente por ID: " + ex.getMessage(), ex);
         } finally {
-            if (rs != null) {
-                try { rs.close(); } catch (SQLException e) { /* log error */ }
-            }
-            if (ps != null) {
-                try { ps.close(); } catch (SQLException e) { /* log error */ }
-            }
-            try { conn.disconnect(); } catch (SQLException e) { /* log error */ }
+            if (rs != null) try { rs.close(); } catch (SQLException ignored) {}
+            if (ps != null) try { ps.close(); } catch (SQLException ignored) {}
+            try { conn.disconnect(); } catch (SQLException ignored) {}
         }
         return paciente;
     }
