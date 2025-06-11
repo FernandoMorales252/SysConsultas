@@ -1,0 +1,63 @@
+-- Crear base de datos
+CREATE DATABASE ConsultasMedicas;
+GO
+
+-- Usar la base de datos recién creada
+USE ConsultasMedicas;
+GO
+
+-- Tabla de Usuarios
+CREATE TABLE Users (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    passwordHash VARCHAR(64) NOT NULL,
+    email VARCHAR(200) NOT NULL UNIQUE,
+    status TINYINT NOT NULL
+);
+
+-- Tabla de Especialidades
+CREATE TABLE Especialidades (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Tabla de Doctores
+CREATE TABLE Doctores (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    especialidad_id INT NOT NULL,
+    contacto VARCHAR(150),
+    FOREIGN KEY (especialidad_id) REFERENCES Especialidades(id)
+);
+
+-- Tabla de Pacientes
+CREATE TABLE Pacientes (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    edad INT,
+    sexo CHAR(1),
+    contacto VARCHAR(100),
+    direccion TEXT
+);
+
+-- Tabla de Citas
+CREATE TABLE Citas (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    paciente_id INT NOT NULL,
+    doctor_id INT NOT NULL,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    motivo TEXT,
+    FOREIGN KEY (paciente_id) REFERENCES Pacientes(id),
+    FOREIGN KEY (doctor_id) REFERENCES Doctores(id)
+);
+
+-- Tabla de Recetas
+CREATE TABLE Recetas (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    cita_id INT NOT NULL UNIQUE,
+    medicamento TEXT NOT NULL,
+    dosis TEXT,
+    observaciones TEXT,
+    FOREIGN KEY (cita_id) REFERENCES Citas(id)
+);

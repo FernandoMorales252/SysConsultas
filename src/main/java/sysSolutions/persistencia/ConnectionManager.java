@@ -53,5 +53,8 @@ public class ConnectionManager {
         }
         return instance;
     }
+
+    public static class getInstance  {
+    }
 }
 
