@@ -17,16 +17,7 @@ class PacienteDAOTest {
     @BeforeEach
     void setUp() {
         pacienteDAO = new PacienteDAO();
-        // Opcional: Aquí podrías añadir lógica para limpiar la tabla de Pacientes
-        // antes de cada test para asegurar la idempotencia.
-        // Por ejemplo, ejecutar un DELETE FROM Pacientes;
-        // try {
-        //     Connection conn = ConnectionManager.getInstance().connect();
-        //     conn.createStatement().executeUpdate("DELETE FROM Pacientes");
-        //     ConnectionManager.getInstance().disconnect();
-        // } catch (SQLException e) {
-        //     e.printStackTrace(); // Log the error
-        // }
+
     }
 
     // Método auxiliar para crear un paciente y verificarlo
