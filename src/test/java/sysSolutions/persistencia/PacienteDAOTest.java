@@ -115,7 +115,5 @@ class PacienteDAOTest {
         assertNull(creado.getContacto());
         assertNull(creado.getDireccion());
 
-        // Opcional: Eliminar este paciente de prueba si no se hace limpieza general
-        // pacienteDAO.delete(creado);
     }
 }
