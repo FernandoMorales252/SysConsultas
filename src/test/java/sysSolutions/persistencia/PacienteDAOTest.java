@@ -104,16 +104,18 @@ class PacienteDAOTest {
         System.out.println("Paciente eliminado.");
     }
 
+
+
     @Test
     void testCrearPacienteConCamposNulos() throws SQLException {
-        Paciente paciente = new Paciente(0, "PacienteNulo", null, null, null, null);
+        Paciente paciente = new Paciente(0, "PacienteCompleto", 30, 'F', "98765432", "Av. Siempre Viva 742");
         Paciente creado = pacienteDAO.create(paciente);
         assertNotNull(creado);
-        assertEquals("PacienteNulo", creado.getNombre());
-        assertNull(creado.getEdad());
-        assertNull(creado.getSexo());
-        assertNull(creado.getContacto());
-        assertNull(creado.getDireccion());
+        assertEquals("PacienteCompleto", creado.getNombre());
+        assertEquals(30, creado.getEdad());
+        assertEquals('F', creado.getSexo());
+        assertEquals("98765432", creado.getContacto());
+        assertEquals("Av. Siempre Viva 742", creado.getDireccion());
 
     }
 }
