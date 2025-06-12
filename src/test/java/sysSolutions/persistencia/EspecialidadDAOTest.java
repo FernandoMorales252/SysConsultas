@@ -59,8 +59,9 @@ class EspecialidadDAOTest {
 
     // Eliminar especialidad y comprobar que fue eliminada
     private void delete(Especialidad especialidad) throws SQLException {
-        assertTrue(especialidadDAO.delete(especialidad));
-        assertNull(especialidadDAO.getById(especialidad.getId()));
+        assertTrue(especialidadDAO.delete(especialidad.getId()));  // Pasamos  id
+        Especialidad res = especialidadDAO.getById(especialidad.getId());
+        assertNull(res);  // Verificamos que ya no existe
     }
 
     @Test
@@ -81,7 +82,7 @@ class EspecialidadDAOTest {
 
     @Test
     void crearEspecialidadEspecifica() throws SQLException {
-        Especialidad esp = new Especialidad(0, "Cardiología");
+        Especialidad esp = new Especialidad(0, "Cardiología test");
         Especialidad creada = especialidadDAO.create(esp);
         assertNotNull(creada);
     }

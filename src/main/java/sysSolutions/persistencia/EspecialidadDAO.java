@@ -1,5 +1,6 @@
 package sysSolutions.persistencia;
 
+
 import sysSolutions.dominio.Especialidad;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,6 @@ public class EspecialidadDAO {
         ResultSet generatedKeys = null;
 
         try {
-            // Solo una llamada a connect()
             ps = conn.connect().prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, especialidad.getNombre());
 
@@ -41,7 +41,6 @@ public class EspecialidadDAO {
         } catch (SQLException ex) {
             throw new SQLException("Error al crear la especialidad: " + ex.getMessage(), ex);
         } finally {
-            // Cerrar recursos en orden inverso
             if (generatedKeys != null) {
                 try { generatedKeys.close(); } catch (SQLException e) { /* log error */ }
             }
@@ -79,7 +78,8 @@ public class EspecialidadDAO {
         return res;
     }
 
-    public boolean delete(Especialidad especialidad) throws SQLException {
+    // Cambiado a recibir id directamente para facilitar la llamada desde test y otros
+    public boolean delete(int id) throws SQLException {
         boolean res = false;
         PreparedStatement ps = null;
 
@@ -87,7 +87,7 @@ public class EspecialidadDAO {
             ps = conn.connect().prepareStatement(
                     "DELETE FROM Especialidades WHERE id = ?"
             );
-            ps.setInt(1, especialidad.getId());
+            ps.setInt(1, id);
 
             res = ps.executeUpdate() > 0;
 
@@ -199,3 +199,4 @@ public class EspecialidadDAO {
         return especialidad;
     }
 }
+
