@@ -82,7 +82,7 @@ class EspecialidadDAOTest {
 
     @Test
     void crearEspecialidadEspecifica() throws SQLException {
-        Especialidad esp = new Especialidad(0, "Cardiología test");
+        Especialidad esp = new Especialidad(8, "OTORINOLARINGOLOGÍA");
         Especialidad creada = especialidadDAO.create(esp);
         assertNotNull(creada);
     }
