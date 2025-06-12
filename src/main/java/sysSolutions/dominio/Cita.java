@@ -1,7 +1,8 @@
 package sysSolutions.dominio;
-import java.util.Objects;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
 public class Cita {
     private int id;
@@ -24,6 +25,19 @@ public class Cita {
         this.hora = hora;
         this.motivo = motivo;
     }
+
+    public Cita(int id, int pacienteId, String pacienteNombre, int doctorId, String doctorNombre,
+                LocalDate fecha, LocalTime hora, String motivo) {
+        this.id = id;
+        this.pacienteId = pacienteId;
+        this.pacienteNombre = pacienteNombre;
+        this.doctorId = doctorId;
+        this.doctorNombre = doctorNombre;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.motivo = motivo;
+    }
+
 
     // Getters y Setters
     public int getId() {
@@ -71,6 +85,7 @@ public class Cita {
     }
 
     public void setFecha(LocalDate fecha) {
+        if (fecha == null) throw new IllegalArgumentException("La fecha no puede ser nula");
         this.fecha = fecha;
     }
 
@@ -79,6 +94,7 @@ public class Cita {
     }
 
     public void setHora(LocalTime hora) {
+        if (hora == null) throw new IllegalArgumentException("La hora no puede ser nula");
         this.hora = hora;
     }
 
@@ -100,14 +116,13 @@ public class Cita {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (!(obj instanceof Cita)) return false;
         Cita cita = (Cita) obj;
         return id == cita.id;
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(id);
+        return Objects.hash(id);
     }
-
 }
