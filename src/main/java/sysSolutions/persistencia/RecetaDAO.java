@@ -76,13 +76,13 @@ public class RecetaDAO {
     // Obtener una receta por ID
 
     public Receta getById(int id) throws SQLException {
-       String sql = "SELECT r.id, r.cita_id, r.medicamento, r.dosis, r.observaciones "  +
+       String sql = "SELECT r.id, r.cita_id, r.medicamento, r.dosis, r.observaciones, " +
                "p.nombre AS paciente_nombre, d.nombre AS doctor_nombre " +
-               "FROM Recetas r" +
+               "FROM Recetas r " +
                "JOIN Citas c ON r.cita_id = c.id " +
                "JOIN Pacientes p ON c.paciente_id = p.id " +
                "JOIN Doctores d ON c.doctor_id = d.id " +
-                "WHERE r.id = ?";
+               "WHERE r.id = ?";
 
         Receta receta = null;
         try (Connection connection = conn.connect();
@@ -107,9 +107,9 @@ public class RecetaDAO {
     // Obtener todas las recetas
 
     public ArrayList<Receta> getAll() throws SQLException {
-        String sql ="SELECT r.id, r.cita_id, r.medicamento, r.dosis, r.observaciones " +
+        String sql ="SELECT r.id, r.cita_id, r.medicamento, r.dosis, r.observaciones, " +
                 "p.nombre AS paciente_nombre, d.nombre AS doctor_nombre " +
-                "FROM Recetas r" +
+                "FROM Recetas r " +
                 "JOIN Citas c ON r.cita_id = c.id " +
                 "JOIN Pacientes p ON c.paciente_id = p.id " +
                 "JOIN Doctores d ON c.doctor_id = d.id " +
@@ -146,15 +146,13 @@ public class RecetaDAO {
                 "JOIN Citas c ON r.cita_id = c.id " +
                 "JOIN Pacientes p ON c.paciente_id = p.id " +
                 "JOIN Doctores d ON c.doctor_id = d.id " +
-                "WHERE p.nombre LIKE ? OR d.nombre LIKE ?"+
-                "ORDER BY r.id DESC";
+                "WHERE p.nombre LIKE ? OR d.nombre LIKE ? " +
+                "ORDER BY r.id";
 
         ArrayList<Receta> recetas = new ArrayList<>();
 
-
         try (Connection connection = conn.connect();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-
 
             ps.setString(1, "%" + nombre + "%");
             ps.setString(2, "%" + nombre + "%");
