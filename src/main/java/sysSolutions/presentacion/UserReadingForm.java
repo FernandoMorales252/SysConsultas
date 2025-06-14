@@ -1,0 +1,4 @@
+package sysSolutions.presentacion;
+import javax.swing.*;
+public class UserReadingForm extends JDialog{
+}
