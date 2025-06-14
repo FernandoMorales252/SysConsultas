@@ -1,9 +1,10 @@
 package sysSolutions.dominio;
 
+
     public class Receta {
         private int id;
         private int citaId;
-        private String medicamento;
+        private Medicamento medicamento;
         private String dosis;
         private String observaciones;
         private String pacienteNombre;
@@ -12,7 +13,7 @@ package sysSolutions.dominio;
         public Receta() {
         }
 
-        public Receta(int id, int citaId, String medicamento, String dosis, String observaciones) {
+        public Receta(int id, int citaId, Medicamento medicamento, String dosis, String observaciones) {
             this.id = id;
             this.citaId = citaId;
             this.medicamento = medicamento;
@@ -20,7 +21,7 @@ package sysSolutions.dominio;
             this.observaciones = observaciones;
         }
 
-        public Receta(int id, int citaId, String medicamento, String dosis, String observaciones,
+        public Receta(int id, int citaId, Medicamento medicamento, String dosis, String observaciones,
                       String pacienteNombre, String doctorNombre) {
             this.id = id;
             this.citaId = citaId;
@@ -48,13 +49,13 @@ package sysSolutions.dominio;
             this.citaId = citaId;
         }
 
-        public String getMedicamento() {
+        public Medicamento getMedicamento() {
             return medicamento;
         }
 
-        public void setMedicamento(String medicamento) {
-            if (medicamento == null || medicamento.trim().isEmpty())
-                throw new IllegalArgumentException("El medicamento no puede estar vacío");
+        public void setMedicamento(Medicamento medicamento) {
+            if (medicamento == null)
+                throw new IllegalArgumentException("El medicamento no puede ser nulo");
             this.medicamento = medicamento;
         }
 
@@ -93,8 +94,9 @@ package sysSolutions.dominio;
         @Override
         public String toString() {
             return "Receta para " + (pacienteNombre != null ? pacienteNombre : "Cita ID: " + citaId) +
-                    " - Medicamento: " + medicamento;
+                    " - Medicamento: " + (medicamento != null ? medicamento.getNombre() : "No asignado");
         }
+
 
         @Override
         public boolean equals(Object o) {

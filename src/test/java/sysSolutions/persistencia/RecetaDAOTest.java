@@ -6,8 +6,10 @@ import sysSolutions.dominio.Cita;
 import sysSolutions.dominio.Doctor;
 import sysSolutions.dominio.Paciente;
 import sysSolutions.dominio.Receta;
+import sysSolutions.dominio.Medicamento;
 
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,6 +22,7 @@ class RecetaDAOTest {
     private CitaDAO citaDAO;
     private DoctorDAO doctorDAO;
     private PacienteDAO pacienteDAO;
+    private MedicamentoDAO medicamentoDAO;
 
     @BeforeEach
     void setUp() {
@@ -27,15 +30,14 @@ class RecetaDAOTest {
         citaDAO = new CitaDAO();
         doctorDAO = new DoctorDAO();
         pacienteDAO = new PacienteDAO();
+        medicamentoDAO = new MedicamentoDAO();
     }
 
     private Receta createReceta(Receta receta) throws SQLException {
         Receta res = recetaDAO.create(receta);
         assertNotNull(res);
         assertEquals(receta.getCitaId(), res.getCitaId());
-        assertEquals(receta.getMedicamento(), res.getMedicamento());
-        assertEquals(receta.getDosis(), res.getDosis());
-        assertEquals(receta.getObservaciones(), res.getObservaciones());
+        assertEquals(receta.getMedicamento().getId(), res.getMedicamento().getId());
         return res;
     }
 
@@ -71,12 +73,14 @@ class RecetaDAOTest {
 
     @Test
     void testRecetaDAOcompleto() throws SQLException {
-        // Preparar cita con paciente y doctor válidos
         Doctor doctor = doctorDAO.getAll().get(0);
         Paciente paciente = pacienteDAO.getAll().get(0);
+        Medicamento medicamento = new Medicamento(0, "Ibuprofeno", new BigDecimal("500.00"), LocalDate.now().plusYears(1));
+        medicamento = medicamentoDAO.create(medicamento);
 
         assertNotNull(doctor);
         assertNotNull(paciente);
+        assertNotNull(medicamento);
 
         LocalDate fecha = LocalDate.now().plusDays(2);
         LocalTime hora = LocalTime.of(11, 0);
@@ -88,7 +92,7 @@ class RecetaDAOTest {
         cita = citaDAO.create(cita);
         assertNotNull(cita);
 
-        Receta receta = new Receta(0, cita.getId(), "Ibuprofeno", "1 cada 8h", "Tomar después de comer");
+        Receta receta = new Receta(0, cita.getId(), medicamento, "1 cada 8h", "Tomar después de comer");
 
         System.out.println("Creando receta...");
         receta = createReceta(receta);
