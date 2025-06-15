@@ -73,6 +73,18 @@ public class MainForm extends JFrame{
             doctorReadingForm.setVisible(true); // Hace visible el formulario de lectura de doctores.
         });
 
+        //Menu de "Citas"
+        JMenu menuCitas = new JMenu("Menú Citas"); // Crea un nuevo menú para Citas
+        menuBar.add(menuCitas); // Agrega el menú "Citas" a la barra de menú.
+
+        JMenuItem itemCitas = new JMenuItem("Citas"); // Crea un nuevo elemento de menú llamado "Citas".
+        menuCitas.add(itemCitas); // Agrega el elemento "Citas" al menú "Citas".
+        itemCitas.addActionListener(e -> { // Agrega un Action Listener
+            CitaReadingForm citaReadingForm = new CitaReadingForm(this); // Crea una instancia de CitaReadingForm
+            citaReadingForm.setVisible(true);  //Hace visible el formulario de lectura de Citas.
+        });
+
+
 
     }
 }
