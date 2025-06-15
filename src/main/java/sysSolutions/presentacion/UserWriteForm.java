@@ -5,6 +5,7 @@ import sysSolutions.persistencia.UserDAO;
 import sysSolutions.dominio.User;
 import sysSolutions.utils.CBOption;
 import sysSolutions.utils.CUD;
+import java.awt.*;
 
 public class UserWriteForm extends  JDialog {
     private JPanel mainPanel;
@@ -31,7 +32,8 @@ public class UserWriteForm extends  JDialog {
         userDAO = new UserDAO(); // Crea una nueva instancia de UserDAO al instanciar este formulario.
         setContentPane(mainPanel); // Establece el panel principal como el contenido de este diálogo.
         setModal(true); // Hace que este diálogo sea modal, bloqueando la interacción con la ventana principal hasta que se cierre.
-        init(); // Llama al método 'init' para inicializar y configure the form based on 'cud'
+        init();// Llama al método 'init' para inicializar y configure the form based on 'cud'
+        initStyles();
         pack(); // Ajusta el tamaño de la ventana para que todos sus componentes se muestren correctamente.
         setLocationRelativeTo(mainForm); // Centra la ventana del diálogo relative a la ventana principal.
 
@@ -39,6 +41,49 @@ public class UserWriteForm extends  JDialog {
         btnCancel.addActionListener(s -> this.dispose());
         // Agrega an ActionListener to the 'btnOk' to trigger the save/update/delete action
         btnOk.addActionListener(s -> ok());
+    }
+
+    private void initStyles() {
+        // Fondo general del panel
+        mainPanel.setBackground(Color.WHITE);
+
+        // Fuente para los inputs
+        Font inputFont = new Font("Segoe UI", Font.PLAIN, 14);
+        Font labelFont = new Font("Segoe UI", Font.BOLD, 13);
+        Font buttonFont = new Font("Segoe UI", Font.BOLD, 14);
+
+        // Inputs
+        txtName.setFont(inputFont);
+        txtEmail.setFont(inputFont);
+        txtPassword.setFont(inputFont);
+        cbStatus.setFont(inputFont);
+
+        // Bordes para inputs
+        txtName.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(180, 180, 180)),
+                BorderFactory.createEmptyBorder(5, 8, 5, 8)
+        ));
+        txtEmail.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(180, 180, 180)),
+                BorderFactory.createEmptyBorder(5, 8, 5, 8)
+        ));
+        txtPassword.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(180, 180, 180)),
+                BorderFactory.createEmptyBorder(5, 8, 5, 8)
+        ));
+        cbStatus.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180)));
+
+        // Botón OK
+        btnOk.setFont(buttonFont);
+        btnOk.setBackground(new Color(0, 123, 255));
+        btnOk.setForeground(Color.WHITE);
+        btnOk.setFocusPainted(false);
+
+        // Botón Cancelar
+        btnCancel.setFont(buttonFont);
+        btnCancel.setBackground(new Color(220, 53, 69));
+        btnCancel.setForeground(Color.WHITE);
+        btnCancel.setFocusPainted(false);
     }
 
     private void init() {

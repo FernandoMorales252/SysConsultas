@@ -3,6 +3,7 @@ import javax.swing.*;
 
 import sysSolutions.persistencia.*;
 import sysSolutions.dominio.User;
+import java.awt.*;
 
 
 
@@ -23,13 +24,39 @@ public class ChangePasswordForm extends JDialog{
         setContentPane(mainPanel); // Establece el panel principal como el contenido de este diálogo.
         setModal(true); // Hace que este diálogo sea modal, lo que significa que bloquea la interacción con la ventana principal hasta que se cierre.
         setTitle("Cambiar password"); // Establece el título de la ventana del diálogo.
-        pack(); // Ajusta el tamaño de la ventana para que todos sus componentes se muestren correctamente.
+        pack();
+        initStyles();// Ajusta el tamaño de la ventana para que todos sus componentes se muestren correctamente.
         setLocationRelativeTo(mainForm); // Centra la ventana del diálogo relative a la ventana principal.
 
         // Agrega un ActionListener al botón btnChangePassword para que ejecute el método changePassword() cuando se haga clic.
         btnChangePassword.addActionListener(e-> changePassword());
 
     }
+
+    private void initStyles() {
+        // Colores y fuentes
+        mainPanel.setBackground(Color.WHITE);
+        Font inputFont = new Font("Segoe UI", Font.PLAIN, 14);
+        Font buttonFont = new Font("Segoe UI", Font.BOLD, 14);
+
+        txtEmail.setFont(inputFont);
+        txtPassword.setFont(inputFont);
+
+        txtEmail.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(200, 200, 200)),
+                BorderFactory.createEmptyBorder(5, 8, 5, 8)
+        ));
+        txtPassword.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(200, 200, 200)),
+                BorderFactory.createEmptyBorder(5, 8, 5, 8)
+        ));
+
+        btnChangePassword.setFont(buttonFont);
+        btnChangePassword.setBackground(new Color(40, 167, 69)); // Verde Bootstrap
+        btnChangePassword.setForeground(Color.WHITE);
+        btnChangePassword.setFocusPainted(false);
+    }
+
     private void changePassword() {
 
         try {

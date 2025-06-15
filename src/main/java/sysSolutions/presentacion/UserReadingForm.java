@@ -8,6 +8,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyAdapter; // Importa la clase KeyAdapter, una clase adaptadora para recibir eventos de teclado.
 import java.awt.event.KeyEvent; // Importa la clase KeyEvent, que representa un evento de teclado.
 import java.util.ArrayList;
+import java.awt.*; // Importa la clase AWT para trabajar con componentes gráficos.
+
+
 
 
 public class UserReadingForm extends JDialog{
@@ -31,7 +34,8 @@ public class UserReadingForm extends JDialog{
         setModal(true); // Hace que este diálogo sea modal, bloqueando la interacción con la ventana principal hasta que se cierre.
         setTitle("Buscar Usuario"); // Establece el título de la ventana del diálogo.
         pack(); // Ajusta el tamaño de la ventana para que todos sus componentes se muestren correctamente.
-        setLocationRelativeTo(mainForm); // Centra la ventana del diálogo relative a la ventana principal.
+        setLocationRelativeTo(mainForm);
+        initStyles(); // Aplica estilo visual// Centra la ventana del diálogo relative a la ventana principal.
 
         // Agrega un listener de teclado al campo de texto txtNombre.
         txtName.addKeyListener(new KeyAdapter() {
@@ -49,6 +53,8 @@ public class UserReadingForm extends JDialog{
                 }
             }
         });
+
+
 
         // Agrega un ActionListener al botón btnCreate.
         btnCreate.addActionListener(s -> {
@@ -93,6 +99,55 @@ public class UserReadingForm extends JDialog{
             }
         });
     }
+
+    private void initStyles() {
+        // Estilo general del panel
+        mainPanel.setBackground(Color.WHITE);
+
+        // Fuente común para campos de texto y botones
+        Font fontInput = new Font("Segoe UI", Font.PLAIN, 14);
+        Font fontButton = new Font("Segoe UI", Font.BOLD, 14);
+
+        // Estilo del campo de texto
+        txtName.setFont(fontInput);
+        txtName.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(180, 180, 180)),
+                BorderFactory.createEmptyBorder(5, 10, 5, 10)
+        ));
+
+        // Estilo de la tabla
+        tableUsers.setFont(fontInput);
+        tableUsers.setRowHeight(28);
+        tableUsers.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+        tableUsers.getTableHeader().setBackground(new Color(240, 240, 240));
+        tableUsers.setSelectionBackground(new Color(220, 235, 255));
+
+        // ScrollPane transparente para tabla
+        tbUsers.setBackground(Color.WHITE);
+        tbUsers.getViewport().setBackground(Color.WHITE);
+        tbUsers.setBorder(BorderFactory.createEmptyBorder());
+
+        // Botones
+        btnCreate.setFont(fontButton);
+        btnCreate.setBackground(new Color(40, 167, 69)); // Verde
+        btnCreate.setForeground(Color.WHITE);
+        btnCreate.setFocusPainted(false);
+
+        btnUpdate.setFont(fontButton);
+        btnUpdate.setBackground(new Color(255, 193, 7)); // Amarillo
+        btnUpdate.setForeground(Color.BLACK);
+        btnUpdate.setFocusPainted(false);
+
+        btnDelete.setFont(fontButton);
+        btnDelete.setBackground(new Color(220, 53, 69)); // Rojo
+        btnDelete.setForeground(Color.WHITE);
+        btnDelete.setFocusPainted(false);
+    }
+
+
+
+
+
     private void search(String query) {
         try {
             // Llama al método 'search' del UserDAO para buscar usuarios cuya información
