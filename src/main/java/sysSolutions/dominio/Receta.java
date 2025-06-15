@@ -1,20 +1,19 @@
 package sysSolutions.dominio;
 
+
     public class Receta {
         private int id;
         private int citaId;
-        private String medicamento;
+        private Medicamento medicamento;
         private String dosis;
         private String observaciones;
-
-        // Campos adicionales para mostrar información de la cita
         private String pacienteNombre;
         private String doctorNombre;
 
         public Receta() {
         }
 
-        public Receta(int id, int citaId, String medicamento, String dosis, String observaciones) {
+        public Receta(int id, int citaId, Medicamento medicamento, String dosis, String observaciones) {
             this.id = id;
             this.citaId = citaId;
             this.medicamento = medicamento;
@@ -22,7 +21,17 @@ package sysSolutions.dominio;
             this.observaciones = observaciones;
         }
 
-        // Getters y Setters
+        public Receta(int id, int citaId, Medicamento medicamento, String dosis, String observaciones,
+                      String pacienteNombre, String doctorNombre) {
+            this.id = id;
+            this.citaId = citaId;
+            this.medicamento = medicamento;
+            this.dosis = dosis;
+            this.observaciones = observaciones;
+            this.pacienteNombre = pacienteNombre;
+            this.doctorNombre = doctorNombre;
+        }
+
         public int getId() {
             return id;
         }
@@ -36,14 +45,17 @@ package sysSolutions.dominio;
         }
 
         public void setCitaId(int citaId) {
+            if (citaId <= 0) throw new IllegalArgumentException("El ID de la cita debe ser positivo");
             this.citaId = citaId;
         }
 
-        public String getMedicamento() {
+        public Medicamento getMedicamento() {
             return medicamento;
         }
 
-        public void setMedicamento(String medicamento) {
+        public void setMedicamento(Medicamento medicamento) {
+            if (medicamento == null)
+                throw new IllegalArgumentException("El medicamento no puede ser nulo");
             this.medicamento = medicamento;
         }
 
@@ -82,20 +94,20 @@ package sysSolutions.dominio;
         @Override
         public String toString() {
             return "Receta para " + (pacienteNombre != null ? pacienteNombre : "Cita ID: " + citaId) +
-                    " - " + medicamento;
+                    " - Medicamento: " + (medicamento != null ? medicamento.getNombre() : "No asignado");
         }
 
+
         @Override
-        public boolean equals(Object obj) {
-            if (this == obj) return true;
-            if (obj == null || getClass() != obj.getClass()) return false;
-            Receta receta = (Receta) obj;
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Receta)) return false;
+            Receta receta = (Receta) o;
             return id == receta.id;
         }
 
-        @Override
+       @Override
         public int hashCode() {
             return Integer.hashCode(id);
         }
-
     }

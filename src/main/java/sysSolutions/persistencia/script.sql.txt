@@ -61,3 +61,12 @@ CREATE TABLE Recetas (
     observaciones TEXT,
     FOREIGN KEY (cita_id) REFERENCES Citas(id)
 );
+
+CREATE TABLE Recetas (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    paciente_id INT FOREIGN KEY REFERENCES Pacientes(id),
+    doctor_id INT FOREIGN KEY REFERENCES Doctores(id),
+    medicamento_id INT FOREIGN KEY REFERENCES Medicamentos(id),
+    indicaciones VARCHAR(255),
+    fecha DATE
+);

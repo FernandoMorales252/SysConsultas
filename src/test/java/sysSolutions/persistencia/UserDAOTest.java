@@ -99,7 +99,7 @@ class UserDAOTest {
     // Crea un usuario específico (admin)
     @Test
     void createUser() throws SQLException {
-        User user = new User(0, "admin", "12345", "admin@gmail.com", (byte) 1);
+        User user = new User(8, "administrador", "admin5@gmail.com", "12345", (byte) 1);
         User res = userDAO.create(user);
         assertNotNull(res);
     }

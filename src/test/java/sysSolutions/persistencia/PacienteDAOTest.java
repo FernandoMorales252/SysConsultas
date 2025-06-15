@@ -17,16 +17,7 @@ class PacienteDAOTest {
     @BeforeEach
     void setUp() {
         pacienteDAO = new PacienteDAO();
-        // Opcional: Aquí podrías añadir lógica para limpiar la tabla de Pacientes
-        // antes de cada test para asegurar la idempotencia.
-        // Por ejemplo, ejecutar un DELETE FROM Pacientes;
-        // try {
-        //     Connection conn = ConnectionManager.getInstance().connect();
-        //     conn.createStatement().executeUpdate("DELETE FROM Pacientes");
-        //     ConnectionManager.getInstance().disconnect();
-        // } catch (SQLException e) {
-        //     e.printStackTrace(); // Log the error
-        // }
+
     }
 
     // Método auxiliar para crear un paciente y verificarlo
@@ -113,18 +104,18 @@ class PacienteDAOTest {
         System.out.println("Paciente eliminado.");
     }
 
+
+
     @Test
     void testCrearPacienteConCamposNulos() throws SQLException {
-        Paciente paciente = new Paciente(0, "PacienteNulo", null, null, null, null);
+        Paciente paciente = new Paciente(0, "PacienteCompleto", 30, 'F', "98765432", "Av. Siempre Viva 742");
         Paciente creado = pacienteDAO.create(paciente);
         assertNotNull(creado);
-        assertEquals("PacienteNulo", creado.getNombre());
-        assertNull(creado.getEdad());
-        assertNull(creado.getSexo());
-        assertNull(creado.getContacto());
-        assertNull(creado.getDireccion());
+        assertEquals("PacienteCompleto", creado.getNombre());
+        assertEquals(30, creado.getEdad());
+        assertEquals('F', creado.getSexo());
+        assertEquals("98765432", creado.getContacto());
+        assertEquals("Av. Siempre Viva 742", creado.getDireccion());
 
-        // Opcional: Eliminar este paciente de prueba si no se hace limpieza general
-        // pacienteDAO.delete(creado);
     }
 }
