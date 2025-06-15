@@ -15,7 +15,7 @@
         <properties>
           <font name="Arial Rounded MT Bold" size="14" style="1"/>
           <foreground color="-16514558"/>
-          <text value="Nombre"/>
+          <text value="Nombre *"/>
         </properties>
       </component>
       <vspacer id="abdb">
@@ -41,17 +41,17 @@
         <properties>
           <font name="Arial Rounded MT Bold" size="14" style="1"/>
           <foreground color="-16514558"/>
-          <text value="Email"/>
+          <text value="Email *"/>
         </properties>
       </component>
-      <component id="a17ad" class="javax.swing.JLabel">
+      <component id="a17ad" class="javax.swing.JLabel" binding="lbPassword">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Arial Rounded MT Bold" size="14" style="1"/>
           <foreground color="-16514558"/>
-          <text value="Contraseña"/>
+          <text value="Contraseña *"/>
         </properties>
       </component>
       <component id="7489" class="javax.swing.JTextField" binding="txtEmail">
@@ -83,7 +83,7 @@
         <properties>
           <font name="Arial Rounded MT Bold" size="14" style="1"/>
           <foreground color="-16514558"/>
-          <text value="Estatus"/>
+          <text value="Estatus *"/>
         </properties>
       </component>
       <component id="e7e39" class="javax.swing.JComboBox" binding="cbStatus">
