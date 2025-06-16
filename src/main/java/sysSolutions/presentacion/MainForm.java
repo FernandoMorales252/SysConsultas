@@ -47,8 +47,7 @@ public class MainForm extends JFrame{
         bannerLabel.setBackground(new Color(240, 248, 255));
         bannerLabel.setOpaque(true);
 
-        // Estilo fuente alternativo si deseas más personalización:
-        // bannerLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
+
 
         // Agregar componentes al panel principal
         mainPanel.add(bannerLabel, BorderLayout.NORTH);
