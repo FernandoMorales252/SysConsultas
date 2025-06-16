@@ -52,7 +52,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="2d68d" class="javax.swing.JTable" binding="table1" default-binding="true">
+          <component id="2d68d" class="javax.swing.JTable" binding="tableUsers">
             <constraints/>
             <properties/>
           </component>

@@ -21,6 +21,9 @@ public class Paciente {
         this.direccion = direccion;
     }
 
+    public Paciente(int id) {
+    }
+
     public int getId() { return id;
     }
     public void setId(int id) { this.id = id;

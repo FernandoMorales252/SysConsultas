@@ -7,8 +7,7 @@ package sysSolutions.dominio;
         private Medicamento medicamento;
         private String dosis;
         private String observaciones;
-        private String pacienteNombre;
-        private String doctorNombre;
+
 
         public Receta() {
         }
@@ -28,8 +27,7 @@ package sysSolutions.dominio;
             this.medicamento = medicamento;
             this.dosis = dosis;
             this.observaciones = observaciones;
-            this.pacienteNombre = pacienteNombre;
-            this.doctorNombre = doctorNombre;
+
         }
 
         public int getId() {
@@ -75,27 +73,9 @@ package sysSolutions.dominio;
             this.observaciones = observaciones;
         }
 
-        public String getPacienteNombre() {
-            return pacienteNombre;
-        }
 
-        public void setPacienteNombre(String pacienteNombre) {
-            this.pacienteNombre = pacienteNombre;
-        }
 
-        public String getDoctorNombre() {
-            return doctorNombre;
-        }
 
-        public void setDoctorNombre(String doctorNombre) {
-            this.doctorNombre = doctorNombre;
-        }
-
-        @Override
-        public String toString() {
-            return "Receta para " + (pacienteNombre != null ? pacienteNombre : "Cita ID: " + citaId) +
-                    " - Medicamento: " + (medicamento != null ? medicamento.getNombre() : "No asignado");
-        }
 
 
         @Override

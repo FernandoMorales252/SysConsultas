@@ -1,25 +1,23 @@
 package sysSolutions;
+import sysSolutions.presentacion.LoginForm;
+import sysSolutions.presentacion.MainForm;
+import javax.swing.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
-        int x = 10;
-        int y = 20;
-        int sum = x + y;
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
 
-        System.out.print("Hello in sysconsulta!");
-
-        System.out.print("Good afternoon in sysconsulta!");
-
-        System.out.print("Hello World! The sum of " + x + " and " + y + " is: " + sum);
-
-
-
-        System.out.print("consulta general!");
+        SwingUtilities.invokeLater(() -> {
+            // Utiliza el hilo de despacho de eventos (Event Dispatch Thread - EDT) para asegurar
+            // que todas las operaciones relacionadas con la interfaz gráfica de usuario (Swing)
+            // se realicen de forma segura y sin bloqueos.
+            MainForm mainForm  = new MainForm(); // Crea una nueva instancia del formulario principal de la aplicación.
+            mainForm.setVisible(true); // Hace visible el formulario principal. Inicialmente podría estar vacío o tener una interfaz de carga.
+            LoginForm loginForm = new LoginForm(mainForm); // Crea una nueva instancia del formulario de inicio de sesión, pasándole la instancia del formulario principal como padre. Esto  para centrar la ventana de inicio de sesión relativa a la principal o para pasar datos entre ellas.
+            loginForm.setVisible(true); // Hace visible la ventana de inicio de sesión, solicitando al usuario que ingrese sus credenciales.
+        });
 
 
 

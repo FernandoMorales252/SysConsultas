@@ -1,11 +1,13 @@
 package sysSolutions.persistencia;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import sysSolutions.dominio.Medicamento;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Date;
 
 
 import java.sql.*;
@@ -112,6 +114,30 @@ public class MedicamentoDAO {
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
         }
+    }
+
+    public ArrayList<Medicamento> search(String nombre) throws SQLException {
+        ArrayList<Medicamento> medicamentos = new ArrayList<>();
+        String sql = "SELECT id, nombre, contenido, fecha_expiracion FROM Medicamentos WHERE nombre LIKE ? ORDER BY nombre";
+
+        try (Connection connection = conn.connect();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + nombre + "%");
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Medicamento m = new Medicamento(
+                            rs.getInt("id"),
+                            rs.getString("nombre"),
+                            rs.getBigDecimal("contenido"),
+                            rs.getDate("fecha_expiracion").toLocalDate()
+                    );
+                    medicamentos.add(m);
+                }
+            }
+        }
+        return medicamentos;
     }
 
 
