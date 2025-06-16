@@ -83,7 +83,7 @@ public class MainForm extends JFrame{
         itemSalir.addActionListener(e -> System.exit(0));
 
         // Menú Mantenimientos
-        JMenu menuMantenimiento = new JMenu("Menú Usuarios");
+        JMenu menuMantenimiento = new JMenu("Usuarios");
         menuBar.add(menuMantenimiento);
 
         JMenuItem itemUsers = new JMenuItem("Usuarios");
@@ -94,7 +94,7 @@ public class MainForm extends JFrame{
         });
 
         //Menu de "Doctores"
-        JMenu menuDoctores = new JMenu("Menú Doctores"); // Crea un nuevo menú llamado "Doctores".
+        JMenu menuDoctores = new JMenu("Doctores"); // Crea un nuevo menú llamado "Doctores".
         menuBar.add(menuDoctores); // Agrega el menú "Doctores" a la barra de menú.
 
         JMenuItem itemDoctores = new JMenuItem("Doctores"); // Crea un nuevo elemento de menú llamado "Doctores".
@@ -105,10 +105,10 @@ public class MainForm extends JFrame{
         });
 
         // Menú "Pacientes"
-        JMenu menuPacientes = new JMenu(" Menú Pacientes"); // Crea un nuevo menú llamado "Pacientes".
+        JMenu menuPacientes = new JMenu(" Pacientes"); // Crea un nuevo menú llamado "Pacientes".
         menuBar.add(menuPacientes); // Agrega el menú "Pacientes" a la barra de menú.
 
-        JMenuItem itemPacientes = new JMenuItem(" Menú Pacientes"); // Crea un nuevo elemento de menú llamado "Pacientes".
+        JMenuItem itemPacientes = new JMenuItem(" Pacientes"); // Crea un nuevo elemento de menú llamado "Pacientes".
         menuPacientes.add(itemPacientes); // Agrega el elemento "Pacientes" al menú "Pacientes".
         itemPacientes.addActionListener(e -> { // Agrega un ActionListener al elemento "Pacientes".
             PacienteReadingForm pacienteReadingForm = new PacienteReadingForm(this); // Cuando se hace clic, crea una nueva instancia de PacienteReadingForm (formulario para leer/listar pacientes), pasándole la instancia actual de MainForm como padre.
@@ -116,7 +116,7 @@ public class MainForm extends JFrame{
         });
 
         // Menú "Citas"
-        JMenu menuCitas = new JMenu("Menú Citas"); // Crea un nuevo menú llamado "Citas".
+        JMenu menuCitas = new JMenu("Citas"); // Crea un nuevo menú llamado "Citas".
         menuBar.add(menuCitas); // Agrega el menú "Citas" a la barra de menú.
 
         JMenuItem itemCitas = new JMenuItem("Citas"); // Crea un nuevo elemento de menú llamado "Citas".
@@ -127,7 +127,7 @@ public class MainForm extends JFrame{
         });
 
         //Menú de recetas
-        JMenu menuRecetas = new JMenu("Menú Recetas"); // Crea un nuevo menú llamado "Recetas".
+        JMenu menuRecetas = new JMenu("Recetas"); // Crea un nuevo menú llamado "Recetas".
         menuBar.add(menuRecetas); // Agrega el menú "Recetas" a la barra de menú.
 
         JMenuItem itemRecetas = new JMenuItem("Recetas"); // Crea un nuevo elemento de menú llamado "Recetas".
@@ -138,7 +138,7 @@ public class MainForm extends JFrame{
         });
 
         // Menú "Especialidades"
-        JMenu menuEspecialidades = new JMenu("Menú Especialidades"); // Crea un nuevo menú llamado "Especialidades".
+        JMenu menuEspecialidades = new JMenu("Especialidades"); // Crea un nuevo menú llamado "Especialidades".
         menuBar.add(menuEspecialidades); // Agrega el menú "Especialidades" a la barra de menú.
 
         JMenuItem itemEspecialidades = new JMenuItem("Especialidades"); // Crea un nuevo elemento de menú llamado "Especialidades".
@@ -149,7 +149,7 @@ public class MainForm extends JFrame{
         });
 
         // Menú "Medicamentos"
-        JMenu menuMedicamentos = new JMenu("Menú Medicamentos"); // Crea un nuevo menú llamado "Medicamentos".
+        JMenu menuMedicamentos = new JMenu("Medicamentos"); // Crea un nuevo menú llamado "Medicamentos".
         menuBar.add(menuMedicamentos); // Agrega el menú "Medicamentos" a la barra de menú.
         JMenuItem itemMedicamentos = new JMenuItem("Medicamentos"); // Crea un nuevo elemento de menú llamado "Medicamentos".
         menuMedicamentos.add(itemMedicamentos); // Agrega el elemento "Medicamentos" al menú "Medicamentos".
