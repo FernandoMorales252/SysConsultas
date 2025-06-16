@@ -137,6 +137,17 @@ public class MainForm extends JFrame{
             recetaReadingForm.setVisible(true); // Hace visible el formulario de lectura de recetas.
         });
 
+        // Menú "Especialidades"
+        JMenu menuEspecialidades = new JMenu("Especialidades"); // Crea un nuevo menú llamado "Especialidades".
+        menuBar.add(menuEspecialidades); // Agrega el menú "Especialidades" a la barra de menú.
+
+        JMenuItem itemEspecialidades = new JMenuItem("Especialidades"); // Crea un nuevo elemento de menú llamado "Especialidades".
+        menuEspecialidades.add(itemEspecialidades); // Agrega el elemento "Especialidades" al menú "Especialidades".
+        itemEspecialidades.addActionListener(e -> { // Agrega un ActionListener al elemento "Especialidades".
+            EspecialidadReadingForm especialidadReadingForm = new EspecialidadReadingForm(this); // Cuando se hace clic, crea una nueva instancia de EspecialidadReadingForm (formulario para leer/listar especialidades), pasándole la instancia actual de MainForm como padre.
+            especialidadReadingForm.setVisible(true); // Hace visible el formulario de lectura de especialidades.
+        });
+
 
     }
 }
