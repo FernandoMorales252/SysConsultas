@@ -116,25 +116,23 @@ public class MainForm extends JFrame{
         });
 
         // Menú "Citas"
-        JMenu menuCitas = new JMenu("Citas"); // Crea un nuevo menú llamado "Citas".
-        menuBar.add(menuCitas); // Agrega el menú "Citas" a la barra de menú.
-
-        JMenuItem itemCitas = new JMenuItem("Citas"); // Crea un nuevo elemento de menú llamado "Citas".
-        menuCitas.add(itemCitas); // Agrega el elemento "Citas" al menú "Citas".
-        itemCitas.addActionListener(e -> { // Agrega un ActionListener al elemento "Citas".
-            CitaReadingForm citaReadingForm = new CitaReadingForm(this); // Cuando se hace clic, crea una nueva instancia de CitaReadingForm (formulario para leer/listar citas), pasándole la instancia actual de MainForm como padre.
-            citaReadingForm.setVisible(true); // Hace visible el formulario de lectura de citas.
+        JMenu menuCitas = new JMenu("Citas");
+        menuBar.add(menuCitas);
+        JMenuItem itemCitas = new JMenuItem("Citas");
+        menuCitas.add(itemCitas);
+        itemCitas.addActionListener(e -> {
+            CitaReadingForm citaReadingForm = new CitaReadingForm(this);
+            citaReadingForm.setVisible(true);
         });
 
         //Menú de recetas
-        JMenu menuRecetas = new JMenu("Recetas"); // Crea un nuevo menú llamado "Recetas".
-        menuBar.add(menuRecetas); // Agrega el menú "Recetas" a la barra de menú.
-
-        JMenuItem itemRecetas = new JMenuItem("Recetas"); // Crea un nuevo elemento de menú llamado "Recetas".
-        menuRecetas.add(itemRecetas); // Agrega el elemento "Recetas" al menú "Recetas".
-        itemRecetas.addActionListener(e -> { // Agrega un ActionListener al elemento "Recetas".
-            RecetasReadingForm recetaReadingForm = new RecetasReadingForm(this); // Cuando se hace clic, crea una nueva instancia de RecetaReadingForm (formulario para leer/listar recetas), pasándole la instancia actual de MainForm como padre.
-            recetaReadingForm.setVisible(true); // Hace visible el formulario de lectura de recetas.
+        JMenu menuRecetas = new JMenu("Recetas");
+        menuBar.add(menuRecetas);
+        JMenuItem itemRecetas = new JMenuItem("Recetas");
+        menuRecetas.add(itemRecetas);
+        itemRecetas.addActionListener(e -> {
+            RecetasReadingForm recetaReadingForm = new RecetasReadingForm(this);
+            recetaReadingForm.setVisible(true);
         });
 
         // Menú "Especialidades"
