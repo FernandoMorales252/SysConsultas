@@ -105,14 +105,13 @@ public class MainForm extends JFrame{
         });
 
         // Menú "Pacientes"
-        JMenu menuPacientes = new JMenu(" Pacientes"); // Crea un nuevo menú llamado "Pacientes".
-        menuBar.add(menuPacientes); // Agrega el menú "Pacientes" a la barra de menú.
-
-        JMenuItem itemPacientes = new JMenuItem(" Pacientes"); // Crea un nuevo elemento de menú llamado "Pacientes".
-        menuPacientes.add(itemPacientes); // Agrega el elemento "Pacientes" al menú "Pacientes".
-        itemPacientes.addActionListener(e -> { // Agrega un ActionListener al elemento "Pacientes".
-            PacienteReadingForm pacienteReadingForm = new PacienteReadingForm(this); // Cuando se hace clic, crea una nueva instancia de PacienteReadingForm (formulario para leer/listar pacientes), pasándole la instancia actual de MainForm como padre.
-            pacienteReadingForm.setVisible(true); // Hace visible el formulario de lectura de pacientes.
+        JMenu menuPacientes = new JMenu(" Pacientes");
+        menuBar.add(menuPacientes);
+        JMenuItem itemPacientes = new JMenuItem(" Pacientes");
+        menuPacientes.add(itemPacientes);
+        itemPacientes.addActionListener(e -> {
+            PacienteReadingForm pacienteReadingForm = new PacienteReadingForm(this);
+            pacienteReadingForm.setVisible(true);
         });
 
         // Menú "Citas"
