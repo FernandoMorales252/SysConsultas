@@ -1,9 +1,17 @@
 package sysSolutions.presentacion;
 import sysSolutions.dominio.User;
 import javax.swing.*;
+import java.awt.*;
+
+
 
 public class MainForm extends JFrame{
+
     private User userAuthenticated;
+    private JPanel mainPanel;
+    private JLabel bannerLabel;
+
+
 
     public User getUserAuthenticated() {
         return userAuthenticated;
@@ -13,53 +21,76 @@ public class MainForm extends JFrame{
         this.userAuthenticated = userAuthenticated;
     }
 
-    public MainForm(){
-        setTitle("Sistema en java de escritorio"); // Establece el título de la ventana principal (JFrame).
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Configura la operación por defecto al cerrar la ventana para que la aplicación se termine.
-        setLocationRelativeTo(null); // Centra la ventana principal en la pantalla.
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Inicializa la ventana principal en estado maximizado, ocupando toda la pantalla.
-        createMenu(); // Llama al método 'createMenu()' para crear y agregar la barra de menú a la ventana principal.
+    public MainForm() {
+        setTitle("Sistema en Java de Escritorio");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        initUI(); // Crear contenido visual
+        createMenu(); // Crear menú
+    }
+
+    private void initUI() {
+        // Crear panel principal
+        mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(Color.WHITE);
+
+        // Banner superior
+        bannerLabel = new JLabel("<html><center>"
+                + "<h1 style='color:#2c3e50;'>BIENVENIDOS A SYSCONSULTAS</h1>"
+                + "<h3 style='color:#16a085;'>Desarrollado por SysSolutions</h3>"
+                + "<h4 style='color:#7f8c8d;'>Creado por: Fernando, Elias, Fatima y Paola</h4>"
+                + "</center></html>");
+        bannerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        bannerLabel.setVerticalAlignment(SwingConstants.CENTER);
+        bannerLabel.setBorder(BorderFactory.createEmptyBorder(30, 10, 30, 10));
+        bannerLabel.setBackground(new Color(240, 248, 255));
+        bannerLabel.setOpaque(true);
+
+        // Estilo fuente alternativo si deseas más personalización:
+        // bannerLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
+
+        // Agregar componentes al panel principal
+        mainPanel.add(bannerLabel, BorderLayout.NORTH);
+        setContentPane(mainPanel); // Establece el panel como contenido de la ventana
+        setLocationRelativeTo(null); // Centrado
     }
 
     private void createMenu() {
-        // Barra de menú
-        JMenuBar menuBar = new JMenuBar(); // Crea una nueva barra de menú.
-        setJMenuBar(menuBar); // Establece la barra de menú creada como la barra de menú de este JFrame (MainForm).
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
 
-        JMenu menuPerfil = new JMenu("Perfil"); // Crea un nuevo menú llamado "Perfil".
-        menuBar.add(menuPerfil); // Agrega el menú "Perfil" a la barra de menú.
+        // Menú Perfil
+        JMenu menuPerfil = new JMenu("Perfil");
+        menuBar.add(menuPerfil);
 
-        JMenuItem itemChangePassword = new JMenuItem("Cambiar contraseña"); // Crea un nuevo elemento de menú llamado "Cambiar contraseña".
-        menuPerfil.add(itemChangePassword); // Agrega el elemento "Cambiar contraseña" al menú "Perfil".
-        itemChangePassword.addActionListener(e -> { // Agrega un ActionListener al elemento "Cambiar contraseña".
-            ChangePasswordForm changePassword = new ChangePasswordForm(this); // Cuando se hace clic, crea una nueva instancia de ChangePasswordForm, pasándole la instancia actual de MainForm como padre.
-            changePassword.setVisible(true); // Hace visible la ventana de cambio de contraseña.
-
+        JMenuItem itemChangePassword = new JMenuItem("Cambiar contraseña");
+        menuPerfil.add(itemChangePassword);
+        itemChangePassword.addActionListener(e -> {
+            ChangePasswordForm changePassword = new ChangePasswordForm(this);
+            changePassword.setVisible(true);
         });
 
-
-        JMenuItem itemChangeUser = new JMenuItem("Cambiar de usuario"); // Crea un nuevo elemento de menú llamado "Cambiar de usuario".
-        menuPerfil.add(itemChangeUser); // Agrega el elemento "Cambiar de usuario" al menú "Perfil".
-        itemChangeUser.addActionListener(e -> { // Agrega un ActionListener al elemento "Cambiar de usuario".
-            LoginForm loginForm = new LoginForm(this); // Cuando se hace clic, crea una nueva instancia de LoginForm (ventana de inicio de sesión), pasándole la instancia actual de MainForm como padre.
-            loginForm.setVisible(true); // Hace visible la ventana de inicio de sesión.
+        JMenuItem itemChangeUser = new JMenuItem("Cambiar de usuario");
+        menuPerfil.add(itemChangeUser);
+        itemChangeUser.addActionListener(e -> {
+            LoginForm loginForm = new LoginForm(this);
+            loginForm.setVisible(true);
         });
 
+        JMenuItem itemSalir = new JMenuItem("Salir");
+        menuPerfil.add(itemSalir);
+        itemSalir.addActionListener(e -> System.exit(0));
 
-        JMenuItem itemSalir = new JMenuItem("Salir"); // Crea un nuevo elemento de menú llamado "Salir".
-        menuPerfil.add(itemSalir); // Agrega el elemento "Salir" al menú "Perfil".
-        itemSalir.addActionListener(e -> System.exit(0)); // Agrega un ActionListener al elemento "Salir". Cuando se hace clic, termina la ejecución de la aplicación (cierra la JVM).
+        // Menú Mantenimientos
+        JMenu menuMantenimiento = new JMenu("Mantenimientos");
+        menuBar.add(menuMantenimiento);
 
-
-        // Menú "Matenimiento"
-        JMenu menuMantenimiento = new JMenu("Mantenimientos"); // Crea un nuevo menú llamado "Mantenimientos".
-        menuBar.add(menuMantenimiento); // Agrega el menú "Mantenimientos" a la barra de menú.
-
-        JMenuItem itemUsers = new JMenuItem("Usuarios"); // Crea un nuevo elemento de menú llamado "Usuarios".
-        menuMantenimiento.add(itemUsers); // Agrega el elemento "Usuarios" al menú "Mantenimientos".
-        itemUsers.addActionListener(e -> { // Agrega un ActionListener al elemento "Usuarios".
-            UserReadingForm userReadingForm=new UserReadingForm(this); // Cuando se hace clic, crea una nueva instancia de UserReadingForm (formulario para leer/listar usuarios), pasándole la instancia actual de MainForm como padre.
-            userReadingForm.setVisible(true); // Hace visible el formulario de lectura de usuarios.
+        JMenuItem itemUsers = new JMenuItem("Usuarios");
+        menuMantenimiento.add(itemUsers);
+        itemUsers.addActionListener(e -> {
+            UserReadingForm userReadingForm = new UserReadingForm(this);
+            userReadingForm.setVisible(true);
         });
 
         //Menu de "Doctores"
@@ -71,6 +102,39 @@ public class MainForm extends JFrame{
         itemDoctores.addActionListener(e -> {
             DoctorReadingForm doctorReadingForm = new DoctorReadingForm(this); // Cuando se hace clic, crea una nueva instancia de DoctorReadingForm (formulario para leer/listar doctores), pasándole la instancia actual de MainForm como padre.
             doctorReadingForm.setVisible(true); // Hace visible el formulario de lectura de doctores.
+        });
+
+        // Menú "Pacientes"
+        JMenu menuPacientes = new JMenu("Pacientes"); // Crea un nuevo menú llamado "Pacientes".
+        menuBar.add(menuPacientes); // Agrega el menú "Pacientes" a la barra de menú.
+
+        JMenuItem itemPacientes = new JMenuItem("Pacientes"); // Crea un nuevo elemento de menú llamado "Pacientes".
+        menuPacientes.add(itemPacientes); // Agrega el elemento "Pacientes" al menú "Pacientes".
+        itemPacientes.addActionListener(e -> { // Agrega un ActionListener al elemento "Pacientes".
+            PacienteReadingForm pacienteReadingForm = new PacienteReadingForm(this); // Cuando se hace clic, crea una nueva instancia de PacienteReadingForm (formulario para leer/listar pacientes), pasándole la instancia actual de MainForm como padre.
+            pacienteReadingForm.setVisible(true); // Hace visible el formulario de lectura de pacientes.
+        });
+
+        // Menú "Citas"
+        JMenu menuCitas = new JMenu("Citas"); // Crea un nuevo menú llamado "Citas".
+        menuBar.add(menuCitas); // Agrega el menú "Citas" a la barra de menú.
+
+        JMenuItem itemCitas = new JMenuItem("Citas"); // Crea un nuevo elemento de menú llamado "Citas".
+        menuCitas.add(itemCitas); // Agrega el elemento "Citas" al menú "Citas".
+        itemCitas.addActionListener(e -> { // Agrega un ActionListener al elemento "Citas".
+            CitaReadingForm citaReadingForm = new CitaReadingForm(this); // Cuando se hace clic, crea una nueva instancia de CitaReadingForm (formulario para leer/listar citas), pasándole la instancia actual de MainForm como padre.
+            citaReadingForm.setVisible(true); // Hace visible el formulario de lectura de citas.
+        });
+
+        //Menú de recetas
+        JMenu menuRecetas = new JMenu("Recetas"); // Crea un nuevo menú llamado "Recetas".
+        menuBar.add(menuRecetas); // Agrega el menú "Recetas" a la barra de menú.
+
+        JMenuItem itemRecetas = new JMenuItem("Recetas"); // Crea un nuevo elemento de menú llamado "Recetas".
+        menuRecetas.add(itemRecetas); // Agrega el elemento "Recetas" al menú "Recetas".
+        itemRecetas.addActionListener(e -> { // Agrega un ActionListener al elemento "Recetas".
+            RecetaReadingForm recetaReadingForm = new RecetaReadingForm(this); // Cuando se hace clic, crea una nueva instancia de RecetaReadingForm (formulario para leer/listar recetas), pasándole la instancia actual de MainForm como padre.
+            recetaReadingForm.setVisible(true); // Hace visible el formulario de lectura de recetas.
         });
 
 

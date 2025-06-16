@@ -2,13 +2,13 @@ package sysSolutions.presentacion;
 import javax.swing.*;
 
 public class MedicamentoReadingForm extends  JDialog{
-    private JButton btnCreate;
-    private JButton btnDelete;
-    private JButton btnUpdate;
-    private JTable table1;
+    private JButton btnCrear;
+    private JButton btnEliminar;
+    private JButton btnModificar;
+    private JTable tbMedicamentos;
     private JTextField txtMedi;
     private JLabel lblNM;
-    private JScrollPane tableMedi;
     private JLabel titulo;
+    private JPanel panelMedi;
     private JPanel mainPanel;
 }

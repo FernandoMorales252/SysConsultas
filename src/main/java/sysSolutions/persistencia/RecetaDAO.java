@@ -57,14 +57,16 @@ public class RecetaDAO {
     }
 
     // Eliminar receta
-    public boolean delete(Receta receta) throws SQLException {
+
+    public boolean delete(int id) throws SQLException {
         String sql = "DELETE FROM Recetas WHERE id = ?";
         try (Connection connection = conn.connect();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, receta.getId());
+            ps.setInt(1, id);
             return ps.executeUpdate() > 0;
         }
     }
+
 
     // Obtener receta por ID
     public Receta getById(int id) throws SQLException {
