@@ -138,24 +138,23 @@ public class MainForm extends JFrame{
         });
 
         // Menú "Especialidades"
-        JMenu menuEspecialidades = new JMenu("Especialidades"); // Crea un nuevo menú llamado "Especialidades".
-        menuBar.add(menuEspecialidades); // Agrega el menú "Especialidades" a la barra de menú.
-
-        JMenuItem itemEspecialidades = new JMenuItem("Especialidades"); // Crea un nuevo elemento de menú llamado "Especialidades".
-        menuEspecialidades.add(itemEspecialidades); // Agrega el elemento "Especialidades" al menú "Especialidades".
-        itemEspecialidades.addActionListener(e -> { // Agrega un ActionListener al elemento "Especialidades".
-            EspecialidadReadingForm especialidadReadingForm = new EspecialidadReadingForm(this); // Cuando se hace clic, crea una nueva instancia de EspecialidadReadingForm (formulario para leer/listar especialidades), pasándole la instancia actual de MainForm como padre.
-            especialidadReadingForm.setVisible(true); // Hace visible el formulario de lectura de especialidades.
+        JMenu menuEspecialidades = new JMenu("Especialidades");
+        menuBar.add(menuEspecialidades);
+        JMenuItem itemEspecialidades = new JMenuItem("Especialidades");
+        menuEspecialidades.add(itemEspecialidades);
+        itemEspecialidades.addActionListener(e -> {
+            EspecialidadReadingForm especialidadReadingForm = new EspecialidadReadingForm(this);
+            especialidadReadingForm.setVisible(true);
         });
 
         // Menú "Medicamentos"
-        JMenu menuMedicamentos = new JMenu("Medicamentos"); // Crea un nuevo menú llamado "Medicamentos".
-        menuBar.add(menuMedicamentos); // Agrega el menú "Medicamentos" a la barra de menú.
-        JMenuItem itemMedicamentos = new JMenuItem("Medicamentos"); // Crea un nuevo elemento de menú llamado "Medicamentos".
-        menuMedicamentos.add(itemMedicamentos); // Agrega el elemento "Medicamentos" al menú "Medicamentos".
-        itemMedicamentos.addActionListener(e -> { // Agrega un ActionListener al elemento "Medicamentos".
-            MedicamentoReadingForm medicamentoReadingForm = new MedicamentoReadingForm(this); // Cuando se hace clic, crea una nueva instancia de MedicamentoReadingForm (formulario para leer/listar medicamentos), pasándole la instancia actual de MainForm como padre.
-            medicamentoReadingForm.setVisible(true); // Hace visible el formulario de lectura de medicamentos.
+        JMenu menuMedicamentos = new JMenu("Medicamentos");
+        menuBar.add(menuMedicamentos);
+        JMenuItem itemMedicamentos = new JMenuItem("Medicamentos");
+        menuMedicamentos.add(itemMedicamentos);
+        itemMedicamentos.addActionListener(e -> {
+            MedicamentoReadingForm medicamentoReadingForm = new MedicamentoReadingForm(this);
+            medicamentoReadingForm.setVisible(true);
         });
 
 
