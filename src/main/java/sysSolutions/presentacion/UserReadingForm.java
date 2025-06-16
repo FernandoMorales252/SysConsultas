@@ -23,7 +23,7 @@ public class UserReadingForm extends JDialog{
     private JScrollPane tbUsers;
 
 
-    private UserDAO userDAO; // Instancia de UserDAO para realizar operaciones de base de datos de usuarios.
+    private UserDAO userDAO;
     private MainForm mainForm; // Referencia a la ventana principal de la aplicación.
 
     // Constructor de la clase UserReadingForm. Recibe una instancia de MainForm como parámetro.
