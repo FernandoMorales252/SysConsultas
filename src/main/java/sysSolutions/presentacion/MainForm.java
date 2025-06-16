@@ -133,7 +133,7 @@ public class MainForm extends JFrame{
         JMenuItem itemRecetas = new JMenuItem("Recetas"); // Crea un nuevo elemento de menú llamado "Recetas".
         menuRecetas.add(itemRecetas); // Agrega el elemento "Recetas" al menú "Recetas".
         itemRecetas.addActionListener(e -> { // Agrega un ActionListener al elemento "Recetas".
-            RecetaReadingForm recetaReadingForm = new RecetaReadingForm(this); // Cuando se hace clic, crea una nueva instancia de RecetaReadingForm (formulario para leer/listar recetas), pasándole la instancia actual de MainForm como padre.
+            RecetasReadingForm recetaReadingForm = new RecetasReadingForm(this); // Cuando se hace clic, crea una nueva instancia de RecetaReadingForm (formulario para leer/listar recetas), pasándole la instancia actual de MainForm como padre.
             recetaReadingForm.setVisible(true); // Hace visible el formulario de lectura de recetas.
         });
 
