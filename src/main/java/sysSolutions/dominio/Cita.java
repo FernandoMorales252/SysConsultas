@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
+//clase que representa una cita médica en el sistema de gestión de citas médicas.
 public class Cita {
     private int id;
     private int pacienteId;

@@ -14,6 +14,8 @@ public class EspecialidadDAO {
         conn = ConnectionManager.getInstance();
     }
 
+
+    // Método para crear una nueva especialidad
     public Especialidad create(Especialidad especialidad) throws SQLException {
         Especialidad res = null;
         String sql = "INSERT INTO Especialidades (nombre) VALUES (?)";
@@ -53,6 +55,8 @@ public class EspecialidadDAO {
         return res;
     }
 
+
+    // Método para actualizar una especialidad
     public boolean update(Especialidad especialidad) throws SQLException {
         boolean res = false;
         PreparedStatement ps = null;
@@ -78,7 +82,7 @@ public class EspecialidadDAO {
         return res;
     }
 
-    // Cambiado a recibir id directamente para facilitar la llamada desde test y otros
+    // Método para eliminar una especialidad por ID
     public boolean delete(int id) throws SQLException {
         boolean res = false;
         PreparedStatement ps = null;
@@ -102,6 +106,8 @@ public class EspecialidadDAO {
         return res;
     }
 
+
+    // Método para obtener todas las especialidades
     public ArrayList<Especialidad> getAll() throws SQLException {
         ArrayList<Especialidad> especialidades = new ArrayList<>();
         PreparedStatement ps = null;
@@ -134,6 +140,8 @@ public class EspecialidadDAO {
         return especialidades;
     }
 
+
+    // Método para buscar especialidades por nombre
     public ArrayList<Especialidad> search(String nombre) throws SQLException {
         ArrayList<Especialidad> especialidades = new ArrayList<>();
         PreparedStatement ps = null;
@@ -167,6 +175,8 @@ public class EspecialidadDAO {
         return especialidades;
     }
 
+
+    // Método para obtener una especialidad por ID
     public Especialidad getById(int id) throws SQLException {
         Especialidad especialidad = null;
         PreparedStatement ps = null;

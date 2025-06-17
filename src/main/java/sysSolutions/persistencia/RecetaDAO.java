@@ -57,7 +57,6 @@ public class RecetaDAO {
     }
 
     // Eliminar receta
-
     public boolean delete(int id) throws SQLException {
         String sql = "DELETE FROM Recetas WHERE id = ?";
         try (Connection connection = conn.connect();
@@ -120,12 +119,10 @@ public class RecetaDAO {
                 "JOIN Doctores d ON c.doctor_id = d.id " +
                 "JOIN Medicamentos m ON r.medicamento_id = m.id " +
                 "ORDER BY r.id";
-
         ArrayList<Receta> recetas = new ArrayList<>();
         try (Connection connection = conn.connect();
              PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
-
             while (rs.next()) {
                 Medicamento med = new Medicamento(
                         rs.getInt("medicamento_id"),
@@ -148,6 +145,7 @@ public class RecetaDAO {
         }
         return recetas;
     }
+
 
     // Buscar recetas por nombre de paciente o doctor
     public ArrayList<Receta> getByPacienteOrDoctor(String nombre) throws SQLException {

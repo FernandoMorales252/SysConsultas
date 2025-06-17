@@ -31,14 +31,14 @@ public class EspecialidadWriteForm extends JDialog{
         super(parent, true); // true para hacerlo modal
         this.especialidad = especialidad;
         setTitle(especialidad == null ? "Nueva Especialidad" : "Editar Especialidad");
-        setSize(400, 250); // Tamaño ajustado para este formulario más simple
-        setLocationRelativeTo(parent); // Centrar en relación a la ventana padre
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Cierra solo este diálogo al hacer clic en X
+        setSize(400, 250);
+        setLocationRelativeTo(parent);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        initComponents(); // Inicializa y configura los componentes de la UI
+        initComponents();
 
         if (especialidad != null) {
-            loadEspecialidadData(); // Si es edición, precarga los datos de la especialidad
+            loadEspecialidadData();
         }
     }
 
@@ -130,26 +130,26 @@ public class EspecialidadWriteForm extends JDialog{
         }
 
         try {
-            if (especialidad == null) { // Modo de creación
+            if (especialidad == null) {
                 Especialidad nuevaEspecialidad = new Especialidad();
                 nuevaEspecialidad.setNombre(nombre);
 
                 Especialidad creada = especialidadDAO.create(nuevaEspecialidad);
                 if (creada != null) {
                     JOptionPane.showMessageDialog(this, "Especialidad creada con éxito. ID: " + creada.getId());
-                    saved = true; // Marca la operación como exitosa
-                    clearFields(); // Limpia para otra posible entrada
+                    saved = true;
+                    clearFields();
                 } else {
                     JOptionPane.showMessageDialog(this, "Error al crear la especialidad.");
                 }
-            } else { // Modo de edición
+            } else {
                 especialidad.setNombre(nombre);
 
                 boolean actualizado = especialidadDAO.update(especialidad);
                 if (actualizado) {
                     JOptionPane.showMessageDialog(this, "Especialidad actualizada con éxito.");
-                    saved = true; // Marca la operación como exitosa
-                    dispose(); // Cierra el diálogo después de la actualización exitosa
+                    saved = true;
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "No se encontró la especialidad para actualizar o no hubo cambios.");
                 }
@@ -167,7 +167,7 @@ public class EspecialidadWriteForm extends JDialog{
     private void clearFields() {
         txtNombreEspecialidad.setText("");
         txtNombreEspecialidad.requestFocus();
-        this.especialidad = null; // Restablecer para el modo de creación
+        this.especialidad = null;
         setTitle("Nueva Especialidad");
         lblTitulo.setText("Agregar nueva especialidad");
         btnAceptar.setText("Guardar");

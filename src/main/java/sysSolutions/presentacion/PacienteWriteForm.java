@@ -23,6 +23,10 @@ public class PacienteWriteForm extends JDialog{
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    /**
+     * Inicializa y configura todos los componentes de la interfaz de usuario,
+     * aplicando un estilo consistente.
+     */
     private void initComponents() {
         Color fondo = new Color(240, 245, 250);
         Color panelColor = Color.WHITE;
@@ -75,7 +79,7 @@ public class PacienteWriteForm extends JDialog{
             }
         }
 
-        // Botones
+
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelBotones.setBackground(panelColor);
         add(panelBotones, BorderLayout.SOUTH);
@@ -113,10 +117,8 @@ public class PacienteWriteForm extends JDialog{
             }
         });
 
-        // Acción al presionar Cancelar
         btnCancelar.addActionListener(e -> dispose());
 
-        // ✅ Acción al presionar Aceptar (con validación)
         btnAceptar.addActionListener(e -> {
             if (validarCampos()) {
                 datosValidados = true; // Se puede guardar
@@ -134,7 +136,7 @@ public class PacienteWriteForm extends JDialog{
         panelBotones.add(btnAceptar);
     }
 
-    // 👉 Método para validar campos
+    // Método para validar campos
     private boolean validarCampos() {
         return !getNombre().isEmpty()
                 && !getEdad().isEmpty()
@@ -143,7 +145,7 @@ public class PacienteWriteForm extends JDialog{
                 && !getDireccion().isEmpty();
     }
 
-    // 👉 Saber si los datos están validados antes de guardar
+
     public boolean isDatosValidados() {
         return datosValidados;
     }
@@ -158,12 +160,17 @@ public class PacienteWriteForm extends JDialog{
     public String getContacto() { return txtContacto.getText().trim(); }
     public String getDireccion() { return txtDireccion.getText().trim(); }
 
+    // Métodos para establecer valores en los campos
     public void setNombre(String nombre) { txtNombre.setText(nombre); }
     public void setEdad(String edad) { txtEdad.setText(edad); }
     public void setSexo(String sexoDescripcion) { CBSexo.setSelectedItem(sexoDescripcion); }
     public void setContacto(String contacto) { txtContacto.setText(contacto); }
     public void setDireccion(String direccion) { txtDireccion.setText(direccion); }
 
+    /**
+     * Limpia todos los campos del formulario.
+     * Útil para reiniciar el formulario después de guardar o cancelar.
+     */
     public void limpiarCampos() {
         txtNombre.setText("");
         txtEdad.setText("");

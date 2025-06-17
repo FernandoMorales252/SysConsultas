@@ -2,6 +2,7 @@ package sysSolutions.dominio;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+//clase que representa un medicamento en el sistema de gestión de medicamentos.
 public class Medicamento {
     private int id;
     private String nombre;

@@ -22,6 +22,12 @@ public class DoctorReadingForm extends JDialog {
 
     private DefaultTableModel tableModel;
 
+    /**
+     * Constructor de la clase DoctorReadingForm.
+     * Inicializa el formulario para gestionar doctores.
+     *
+     * @param owner Ventana padre del diálogo.
+     */
     public DoctorReadingForm(Frame owner) {
         super(owner, "Gestión de Doctores", true);
         doctorDAO = new DoctorDAO();
@@ -33,6 +39,10 @@ public class DoctorReadingForm extends JDialog {
         setLocationRelativeTo(owner);
     }
 
+    /**
+     * Inicializa los componentes de la interfaz gráfica.
+     * Configura el diseño, colores, fuentes y eventos de los componentes.
+     */
     private void initComponents() {
         setLayout(new BorderLayout());
         getContentPane().setBackground(Color.WHITE);
@@ -110,6 +120,11 @@ public class DoctorReadingForm extends JDialog {
         add(panelBotones, BorderLayout.SOUTH);
     }
 
+
+    /**
+     * Inicializa los eventos de los componentes.
+     * Configura los listeners para manejar acciones como búsqueda, creación, edición y eliminación de doctores.
+     */
     private void initEvents() {
         // Búsqueda en tiempo real
         txtBuscar.getDocument().addDocumentListener(new DocumentListener() {
@@ -194,6 +209,10 @@ public class DoctorReadingForm extends JDialog {
         });
     }
 
+    /**
+     * Carga la lista de doctores desde la base de datos y actualiza la tabla.
+     * Maneja excepciones y muestra mensajes de error si ocurre algún problema.
+     */
     private void cargarDoctores() {
         try {
             ArrayList<Doctor> doctores = doctorDAO.getAll();
@@ -203,6 +222,11 @@ public class DoctorReadingForm extends JDialog {
         }
     }
 
+    /**
+     * Busca doctores por nombre según el texto ingresado en el campo de búsqueda.
+     * Actualiza la tabla con los resultados encontrados.
+     * Si el campo de búsqueda está vacío, recarga todos los doctores.
+     */
     private void buscarDoctores() {
         String filtro = txtBuscar.getText().trim();
         if (filtro.isEmpty()) {
@@ -217,6 +241,12 @@ public class DoctorReadingForm extends JDialog {
         }
     }
 
+    /**
+     * Carga los doctores en la tabla.
+     * Limpia la tabla y agrega cada doctor como una nueva fila.
+     *
+     * @param doctores Lista de doctores a mostrar en la tabla.
+     */
     private void cargarTabla(ArrayList<Doctor> doctores) {
         tableModel.setRowCount(0);
         for (Doctor doc : doctores) {

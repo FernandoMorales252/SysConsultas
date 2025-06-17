@@ -62,11 +62,19 @@ CREATE TABLE Recetas (
     FOREIGN KEY (cita_id) REFERENCES Citas(id)
 );
 
-CREATE TABLE Recetas (
-    id INT PRIMARY KEY IDENTITY(1,1),
-    paciente_id INT FOREIGN KEY REFERENCES Pacientes(id),
-    doctor_id INT FOREIGN KEY REFERENCES Doctores(id),
-    medicamento_id INT FOREIGN KEY REFERENCES Medicamentos(id),
-    indicaciones VARCHAR(255),
-    fecha DATE
+//modificación de la tabla Recetas para incluir una referencia a Medicamentos
+CREATE TABLE Medicamentos (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    contenido DECIMAL(10, 2) NOT NULL,
+    fecha_expiracion DATE NOT NULL
 );
+
+
+ALTER TABLE Recetas DROP COLUMN medicamento;
+
+
+ALTER TABLE Recetas ADD medicamento_id INT NOT NULL;
+
+ALTER TABLE Recetas ADD CONSTRAINT FK_Recetas_Medicamentos
+    FOREIGN KEY (medicamento_id) REFERENCES Medicamentos(id);

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class CitaWriteForm extends JDialog {
     private JLabel titulo;
-    private JComboBox<Paciente> cbPaciente;
+    private JComboBox<Paciente> cbPaciente; // JComboBox para seleccionar paciente
     private JComboBox<Doctor> cbDoctor;
     private JTextField txtFecha;
     private JTextField txtHora;
@@ -52,7 +52,7 @@ public class CitaWriteForm extends JDialog {
     }
 
     private void initComponents() {
-        titulo = new JLabel(cita == null ? "Programar nueva cita" : "Editar cita", JLabel.CENTER);
+        titulo = new JLabel(cita == null ? "Agregar nueva cita" : "Editar cita", JLabel.CENTER);
         titulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
         titulo.setForeground(new Color(33, 97, 140));
 

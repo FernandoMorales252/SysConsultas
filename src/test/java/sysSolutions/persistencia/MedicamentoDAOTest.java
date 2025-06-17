@@ -40,8 +40,6 @@ class MedicamentoDAOTest {
         assertNotNull(encontrado);
         assertEquals(medicamento.getNombre(), encontrado.getNombre());
 
-        // ⚠️ Solución aplicada: usamos compareTo() para evitar fallo por diferencias en la escala de BigDecimal
-        // ❌ Error original: assertEquals(medicamento.getContenido(), encontrado.getContenido()); // Esto fallaba si la escala era distinta
         assertEquals(0, medicamento.getContenido().compareTo(encontrado.getContenido()),
                 "El contenido del medicamento debe ser numéricamente igual, sin importar la escala");
     }
@@ -76,6 +74,7 @@ class MedicamentoDAOTest {
         delete(creado);
     }
 
+    // Método de prueba para crear un medicamento
     @Test
     void crearMedicamentoEspecifico() throws SQLException {
         Medicamento medicamento = new Medicamento(
