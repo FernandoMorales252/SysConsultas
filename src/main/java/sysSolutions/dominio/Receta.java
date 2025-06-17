@@ -1,6 +1,6 @@
 package sysSolutions.dominio;
 
-
+// Clase que representa una receta médica en el sistema de gestión de citas médicas.
     public class Receta {
         private int id;
         private int citaId;

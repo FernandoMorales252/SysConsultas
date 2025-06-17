@@ -15,12 +15,12 @@ public class DoctorWriteForm extends JDialog{
 
     private JTextField txtNombre;
     private JTextField txtCorreo;
-    private JComboBox <Especialidad> cbEspecialidad;
+    private JComboBox <Especialidad> cbEspecialidad; // Combo para seleccionar especialidad
     private JButton btnCancelar;
     private JButton btnGuardar;
     private JLabel titulo;
 
-    private Doctor doctor; // null si es creación nueva, no null si es edición
+    private Doctor doctor;
     private final DoctorDAO doctorDAO = new DoctorDAO();
     private final EspecialidadDAO especialidadDAO = new EspecialidadDAO();
 
@@ -31,21 +31,18 @@ public class DoctorWriteForm extends JDialog{
         setSize(400, 300);
         setLocationRelativeTo(parent);
         initComponents();
-
         try {
-            loadEspecialidades(); // Carga inicial del combo con especialidades
+            loadEspecialidades();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error cargando especialidades: " + e.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
-
         if (doctor != null) {
-            loadDoctorData(); // Si es edición, precargar datos del doctor
+            loadDoctorData();
         }
     }
 
     private void initComponents() {
-        // Configurar título con un color más suave y fuente elegante
         titulo = new JLabel(doctor == null ? "Agregar nuevo doctor" : "Editar doctor", JLabel.CENTER);
         titulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
         titulo.setForeground(new Color(33, 97, 140)); // azul hospital
@@ -65,7 +62,7 @@ public class DoctorWriteForm extends JDialog{
         btnGuardar.setFocusPainted(false);
         btnGuardar.setFont(new Font("Segoe UI", Font.BOLD, 14));
 
-        btnCancelar.setBackground(new Color(220, 53, 69)); // rojo suave para cancelar
+        btnCancelar.setBackground(new Color(220, 53, 69));
         btnCancelar.setForeground(Color.WHITE);
         btnCancelar.setFocusPainted(false);
         btnCancelar.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -114,6 +111,7 @@ public class DoctorWriteForm extends JDialog{
         add(panelCampos, BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);
     }
+
 
     private void loadEspecialidades() throws SQLException {
         ArrayList<Especialidad> especialidades = especialidadDAO.getAll();

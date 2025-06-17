@@ -24,6 +24,8 @@ class RecetaDAOTest {
     private PacienteDAO pacienteDAO;
     private MedicamentoDAO medicamentoDAO;
 
+
+    // Clase de prueba para RecetaDAO que cubre todos los métodos CRUD y búsqueda
     @BeforeEach
     void setUp() {
         recetaDAO = new RecetaDAO();
@@ -55,7 +57,7 @@ class RecetaDAOTest {
     }
 
     private void deleteReceta(Receta receta) throws SQLException {
-        assertTrue(recetaDAO.delete(receta));
+        assertTrue(recetaDAO.delete(receta.getId()));
         assertNull(recetaDAO.getById(receta.getId()));
     }
 
@@ -71,6 +73,8 @@ class RecetaDAOTest {
         assertTrue(recetas.size() > 0, "No se encontraron recetas para el nombre: " + nombre);
     }
 
+
+    // Método de prueba que combina todos los pasos
     @Test
     void testRecetaDAOcompleto() throws SQLException {
         Doctor doctor = doctorDAO.getAll().get(0);

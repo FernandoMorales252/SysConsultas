@@ -13,6 +13,8 @@ public class PacienteDAO {
         conn = ConnectionManager.getInstance();
     }
 
+
+    // Método para crear un nuevo paciente
     public Paciente create(Paciente paciente) throws SQLException {
         Paciente res = null;
         String sql = "INSERT INTO Pacientes (nombre, edad, sexo, contacto, direccion) VALUES (?, ?, ?, ?, ?)";
@@ -51,6 +53,8 @@ public class PacienteDAO {
         return res;
     }
 
+
+    // Método para actualizar un paciente
     public boolean update(Paciente paciente) throws SQLException {
         boolean res = false;
         PreparedStatement ps = null;
@@ -78,6 +82,8 @@ public class PacienteDAO {
         return res;
     }
 
+
+    // Método para eliminar un paciente
     public boolean delete(Paciente paciente) throws SQLException {
         boolean res = false;
         PreparedStatement ps = null;
@@ -99,6 +105,8 @@ public class PacienteDAO {
         return res;
     }
 
+
+    // Métodos para obtener pacientes
     public ArrayList<Paciente> getAll() throws SQLException {
         ArrayList<Paciente> pacientes = new ArrayList<>();
         PreparedStatement ps = null;
@@ -132,6 +140,8 @@ public class PacienteDAO {
         return pacientes;
     }
 
+
+    // Método para buscar pacientes por nombre parcial
     public ArrayList<Paciente> search(String nombreParcial) throws SQLException {
         ArrayList<Paciente> pacientes = new ArrayList<>();
         PreparedStatement ps = null;
@@ -166,6 +176,9 @@ public class PacienteDAO {
         return pacientes;
     }
 
+
+
+    // Método para obtener un paciente por ID
     public Paciente getById(int id) throws SQLException {
         Paciente paciente = null;
         PreparedStatement ps = null;

@@ -105,7 +105,7 @@ class PacienteDAOTest {
     }
 
 
-
+// Método de prueba para crear un paciente
     @Test
     void testCrearPacienteConCamposNulos() throws SQLException {
         Paciente paciente = new Paciente(0, "PacienteCompleto", 30, 'F', "98765432", "Av. Siempre Viva 742");

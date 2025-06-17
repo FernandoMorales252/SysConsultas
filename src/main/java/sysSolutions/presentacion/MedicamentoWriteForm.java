@@ -18,12 +18,11 @@ public class MedicamentoWriteForm extends JDialog {
     private JTextField txtFecha;
     private JButton btnCancelar;
     private JButton btnGuardar;
-
-    // Componente adicional para el título (similar a EspecialidadWriteForm)
     private JLabel lblTitulo;
 
-    private Medicamento medicamento; // null si es creación nueva, con datos si es edición
+    private Medicamento medicamento;
     private final MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
+
 
     /**
      * Constructor para el formulario de escritura de medicamentos.
@@ -32,17 +31,17 @@ public class MedicamentoWriteForm extends JDialog {
      * @param medicamento La instancia de Medicamento a editar. Si es null, se asume que es un nuevo medicamento.
      */
     public MedicamentoWriteForm(JDialog parent, Medicamento medicamento) {
-        super(parent, true); // true para hacerlo modal
+        super(parent, true);
         this.medicamento = medicamento;
         setTitle(medicamento == null ? "Nuevo Medicamento" : "Editar Medicamento");
-        setSize(450, 350); // Ajustar tamaño para campos
+        setSize(450, 350);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         initComponents();
 
         if (medicamento != null) {
-            loadMedicamentoData(); // Si es edición, precarga los datos del medicamento
+            loadMedicamentoData();
         }
     }
 

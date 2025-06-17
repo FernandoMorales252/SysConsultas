@@ -1,5 +1,6 @@
 package sysSolutions.dominio;
 
+//clase que representa una especialidad médica en el sistema de gestión de citas médicas.
 public class Especialidad {
 
         private int id;

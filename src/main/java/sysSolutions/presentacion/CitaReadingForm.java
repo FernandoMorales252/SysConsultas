@@ -21,6 +21,12 @@ public class CitaReadingForm extends JDialog {
     private CitaDAO citaDAO;
     private DefaultTableModel tableModel;
 
+    /**
+     * Constructor de la clase CitaReadingForm.
+     * Inicializa el formulario de gestión de citas.
+     *
+     * @param owner Ventana padre del diálogo.
+     */
     public CitaReadingForm(Frame owner) {
         super(owner, "Gestión de Citas", true);
         citaDAO = new CitaDAO();
@@ -32,6 +38,10 @@ public class CitaReadingForm extends JDialog {
         setLocationRelativeTo(owner);
     }
 
+    /**
+     * Método para inicializar los componentes de la interfaz gráfica.
+     * Configura el diseño, los paneles, las tablas y los botones.
+     */
     private void initComponents() {
         setLayout(new BorderLayout());
         getContentPane().setBackground(Color.WHITE);
@@ -105,6 +115,10 @@ public class CitaReadingForm extends JDialog {
         add(panelBotones, BorderLayout.SOUTH);
     }
 
+    /**
+     * Método para inicializar los eventos de los componentes.
+     * Configura los listeners para los botones y el campo de búsqueda.
+     */
     private void initEvents() {
         txtBuscar.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -188,6 +202,10 @@ public class CitaReadingForm extends JDialog {
         });
     }
 
+    /**
+     * Método para cargar todas las citas desde la base de datos y mostrarlas en la tabla.
+     * Maneja excepciones y muestra mensajes de error si ocurre algún problema.
+     */
     private void cargarCitas() {
         try {
             ArrayList<Cita> citas = citaDAO.getAll();
@@ -197,6 +215,11 @@ public class CitaReadingForm extends JDialog {
         }
     }
 
+
+    /**
+     * Método para buscar citas por nombre de paciente o doctor.
+     * Actualiza la tabla con los resultados de la búsqueda.
+     */
     private void buscarCitas() {
         String filtro = txtBuscar.getText().trim();
         if (filtro.isEmpty()) {
@@ -212,6 +235,13 @@ public class CitaReadingForm extends JDialog {
         }
     }
 
+
+    /**
+     * Método para cargar los datos de las citas en la tabla.
+     * Limpia la tabla y agrega las filas correspondientes a cada cita.
+     *
+     * @param citas Lista de citas a mostrar en la tabla.
+     */
     private void cargarTabla(ArrayList<Cita> citas) {
         tableModel.setRowCount(0);
         for (Cita cita : citas) {

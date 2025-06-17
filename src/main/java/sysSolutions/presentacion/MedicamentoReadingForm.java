@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel; // Asegurarse de que este import esté correcto
+import javax.swing.ListSelectionModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -18,15 +18,15 @@ import java.util.List;
 
 public class MedicamentoReadingForm extends JDialog {
     private JTable tbMedicamentos; // La tabla de medicamentos
-    private JButton btnCrear;
-    private JButton btnEliminar;
-    private JButton btnModificar; // Corresponde a btnEditar en DoctorReadingForm
-    private JTextField txtMedi; // txt para buscar por nombre, renombrado a txtBuscar
-    private JLabel lblNM; // buscar por nombre
-    private JLabel titulo; // Etiqueta para el título principal
-    // Eliminamos panelMedi y mainPanel del esqueleto, ya que el JDialog se usa directamente como contenedor principal
+    private JButton btnCrear;// Botón para crear un nuevo medicamento
+    private JButton btnEliminar;// Botón para eliminar un medicamento
+    private JButton btnModificar; // Botón para modificar un medicamento
+    private JTextField txtMedi; // Campo de búsqueda por nombre del medicamento
+    private JLabel lblNM; // Etiqueta para el campo de búsqueda por nombre
+    private JLabel titulo; // Título de la ventana
 
-    private JButton btnActualizar; // Botón para recargar la lista
+
+    private JButton btnActualizar;
 
     private MedicamentoDAO medicamentoDAO;
     private DefaultTableModel tableModel;
@@ -37,13 +37,13 @@ public class MedicamentoReadingForm extends JDialog {
      * @param owner El Frame padre desde donde se llama a este diálogo (por ejemplo, tu MainForm).
      */
     public MedicamentoReadingForm(Frame owner) {
-        super(owner, "Gestión de Medicamentos", true); // Título y modal
+        super(owner, "Gestión de Medicamentos", true);
         medicamentoDAO = new MedicamentoDAO();
         initComponents();
-        loadAllMedicamentos(); // Carga inicial de todos los medicamentos
+        loadAllMedicamentos();
         initEvents();
 
-        setSize(800, 500); // Tamaño adecuado para la tabla
+        setSize(800, 500);
         setLocationRelativeTo(owner);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
@@ -53,60 +53,59 @@ public class MedicamentoReadingForm extends JDialog {
      * aplicando estilos similares a DoctorReadingForm.
      */
     private void initComponents() {
-        setLayout(new BorderLayout()); // Establecemos el layout del JDialog
+        setLayout(new BorderLayout());
         getContentPane().setBackground(Color.WHITE);
 
         // Panel superior para el título y la búsqueda
         JPanel topContainerPanel = new JPanel(new BorderLayout());
         topContainerPanel.setBackground(Color.WHITE);
 
-        // Título del formulario (usando la variable 'titulo' de tu esqueleto)
+
         titulo = new JLabel("Gestión de Medicamentos", JLabel.CENTER);
         titulo.setFont(new Font("Segoe UI", Font.BOLD, 22));
         titulo.setForeground(new Color(33, 97, 140)); // Azul hospitalario
         topContainerPanel.add(titulo, BorderLayout.NORTH);
 
-        // Panel de búsqueda (similar al DoctorReadingForm)
+
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         searchPanel.setBackground(Color.WHITE);
         searchPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
-        // Etiqueta para el campo de búsqueda (usando lblNM de tu esqueleto)
+
         lblNM = new JLabel("Buscar por nombre:");
         lblNM.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         lblNM.setForeground(new Color(55, 55, 55));
 
-        // Campo de texto para la búsqueda (usando txtMedi de tu esqueleto)
         txtMedi = new JTextField(20);
         txtMedi.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 
-        JButton btnLimpiarBusqueda = new JButton("Limpiar"); // Botón para limpiar la búsqueda
-        btnLimpiarBusqueda.setBackground(new Color(108, 117, 125)); // Gris oscuro
+        JButton btnLimpiarBusqueda = new JButton("Limpiar");
+        btnLimpiarBusqueda.setBackground(new Color(108, 117, 125));
         btnLimpiarBusqueda.setForeground(Color.WHITE);
         btnLimpiarBusqueda.setFocusPainted(false);
         btnLimpiarBusqueda.setFont(new Font("Segoe UI", Font.BOLD, 12));
         btnLimpiarBusqueda.addActionListener(e -> {
-            txtMedi.setText(""); // Limpia el campo de búsqueda
-            loadAllMedicamentos(); // Recarga todos los medicamentos
+            txtMedi.setText("");
+            loadAllMedicamentos();
         });
 
-        searchPanel.add(lblNM); // Añade la etiqueta
-        searchPanel.add(txtMedi); // CORRECCIÓN: Ahora añade el JTextField 'txtMedi'
-        searchPanel.add(btnLimpiarBusqueda); // Añade el botón de limpiar
+        searchPanel.add(lblNM);
+        searchPanel.add(txtMedi);
+        searchPanel.add(btnLimpiarBusqueda);
         topContainerPanel.add(searchPanel, BorderLayout.CENTER);
 
         add(topContainerPanel, BorderLayout.NORTH);
 
-        // Tabla de Medicamentos (adaptada para DefaultTableModel)
+
         // Columnas: ID, Nombre, Contenido, Fecha Expiración
         String[] columnNames = {"ID", "Nombre", "Contenido", "Fecha Expiración"};
         tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // Las celdas no son editables directamente
+                return false;
             }
         };
-        tbMedicamentos = new JTable(tableModel); // Usamos tbMedicamentos del esqueleto
+        tbMedicamentos = new JTable(tableModel);
         tbMedicamentos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tbMedicamentos.setRowHeight(25);
         tbMedicamentos.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -115,41 +114,39 @@ public class MedicamentoReadingForm extends JDialog {
         tbMedicamentos.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         tbMedicamentos.setGridColor(new Color(220, 220, 220));
         tbMedicamentos.setFillsViewportHeight(true);
-        tbMedicamentos.setAutoCreateRowSorter(true); // Habilita la ordenación
+        tbMedicamentos.setAutoCreateRowSorter(true);
 
         JScrollPane scrollPane = new JScrollPane(tbMedicamentos);
         scrollPane.setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)));
         add(scrollPane, BorderLayout.CENTER);
-
-        // Panel de botones de acción (Crear, Modificar, Eliminar, Actualizar)
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
 
         btnCrear = new JButton("Crear");
-        btnModificar = new JButton("Modificar"); // Nombre del botón
+        btnModificar = new JButton("Modificar");
         btnEliminar = new JButton("Eliminar");
-        btnActualizar = new JButton("Actualizar Lista"); // Botón para recargar
+        btnActualizar = new JButton("Actualizar Lista");
 
         // Estilo de botones de acción
         Font btnFont = new Font("Segoe UI", Font.BOLD, 14);
 
-        btnCrear.setBackground(new Color(40, 167, 69)); // Verde éxito
+        btnCrear.setBackground(new Color(40, 167, 69));
         btnCrear.setForeground(Color.WHITE);
         btnCrear.setFocusPainted(false);
         btnCrear.setFont(btnFont);
 
-        btnModificar.setBackground(new Color(0, 123, 255)); // Azul info
+        btnModificar.setBackground(new Color(0, 123, 255));
         btnModificar.setForeground(Color.WHITE);
         btnModificar.setFocusPainted(false);
         btnModificar.setFont(btnFont);
 
-        btnEliminar.setBackground(new Color(220, 53, 69)); // Rojo peligro
+        btnEliminar.setBackground(new Color(220, 53, 69));
         btnEliminar.setForeground(Color.WHITE);
         btnEliminar.setFocusPainted(false);
         btnEliminar.setFont(btnFont);
 
-        btnActualizar.setBackground(new Color(23, 162, 184)); // Cian suave
+        btnActualizar.setBackground(new Color(23, 162, 184));
         btnActualizar.setForeground(Color.WHITE);
         btnActualizar.setFocusPainted(false);
         btnActualizar.setFont(btnFont);
@@ -166,7 +163,6 @@ public class MedicamentoReadingForm extends JDialog {
      * Inicializa los listeners de eventos para los componentes de la UI.
      */
     private void initEvents() {
-        // Búsqueda en tiempo real (similar a DoctorReadingForm)
         txtMedi.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -193,7 +189,7 @@ public class MedicamentoReadingForm extends JDialog {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-                    onModifyMedicamento(); // Llama a modificar al doble clic
+                    onModifyMedicamento();
                 }
             }
         });
@@ -218,16 +214,13 @@ public class MedicamentoReadingForm extends JDialog {
     private void searchMedicamentos() {
         String filter = txtMedi.getText().trim();
         if (filter.isEmpty()) {
-            loadAllMedicamentos(); // Si el campo está vacío, mostrar todos
+            loadAllMedicamentos();
             return;
         }
         try {
-            ArrayList<Medicamento> results = medicamentoDAO.search(filter); // Usamos el nuevo método search del DAO
+            ArrayList<Medicamento> results = medicamentoDAO.search(filter);
             populateTable(results);
-            if (results.isEmpty()) {
-                // Puedes comentar o dejar este JOptionPane si quieres que aparezca un aviso al no encontrar resultados
-                // JOptionPane.showMessageDialog(this, "No se encontraron medicamentos con el criterio de búsqueda.", "Sin Resultados", JOptionPane.INFORMATION_MESSAGE);
-            }
+            if (results.isEmpty()) {}
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error al buscar medicamentos: " + ex.getMessage(), "Error DB", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
@@ -240,7 +233,7 @@ public class MedicamentoReadingForm extends JDialog {
      * @param medicamentos La lista de objetos Medicamento a mostrar.
      */
     private void populateTable(ArrayList<Medicamento> medicamentos) {
-        tableModel.setRowCount(0); // Limpiar todas las filas existentes
+        tableModel.setRowCount(0);
         for (Medicamento med : medicamentos) {
             tableModel.addRow(new Object[]{
                     med.getId(),
@@ -258,9 +251,10 @@ public class MedicamentoReadingForm extends JDialog {
         MedicamentoWriteForm writeForm = new MedicamentoWriteForm(this, null); // Pasamos 'this' como padre y null
         writeForm.setVisible(true);
         if (writeForm.isSaved()) {
-            loadAllMedicamentos(); // Recargar la tabla si se guardó el nuevo medicamento
+            loadAllMedicamentos();
         }
     }
+
 
     /**
      * Abre el MedicamentoWriteForm para modificar el medicamento seleccionado.
@@ -271,18 +265,16 @@ public class MedicamentoReadingForm extends JDialog {
             JOptionPane.showMessageDialog(this, "Seleccione un medicamento para modificar.", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        // Convertir la fila seleccionada en la vista a la fila en el modelo (importante si la tabla está ordenada)
         int modelRow = tbMedicamentos.convertRowIndexToModel(selectedRow);
-        int medicamentoId = (int) tableModel.getValueAt(modelRow, 0); // Obtener el ID de la primera columna
+        int medicamentoId = (int) tableModel.getValueAt(modelRow, 0);
 
         try {
-            Medicamento medicamento = medicamentoDAO.getById(medicamentoId); // Obtener el medicamento completo por ID
+            Medicamento medicamento = medicamentoDAO.getById(medicamentoId);
             if (medicamento != null) {
-                MedicamentoWriteForm writeForm = new MedicamentoWriteForm(this, medicamento); // Pasar el medicamento para edición
+                MedicamentoWriteForm writeForm = new MedicamentoWriteForm(this, medicamento);
                 writeForm.setVisible(true);
                 if (writeForm.isSaved()) {
-                    loadAllMedicamentos(); // Recargar la tabla si el medicamento fue actualizado
+                    loadAllMedicamentos();
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Medicamento no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -304,15 +296,15 @@ public class MedicamentoReadingForm extends JDialog {
         }
 
         int modelRow = tbMedicamentos.convertRowIndexToModel(selectedRow);
-        int medicamentoId = (int) tableModel.getValueAt(modelRow, 0); // Obtener el ID del medicamento
+        int medicamentoId = (int) tableModel.getValueAt(modelRow, 0);
 
         int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el medicamento con ID: " + medicamentoId + "?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
-                boolean deleted = medicamentoDAO.delete(medicamentoId); // Tu DAO ya usa el ID directamente
+                boolean deleted = medicamentoDAO.delete(medicamentoId);
                 if (deleted) {
                     JOptionPane.showMessageDialog(this, "Medicamento eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    loadAllMedicamentos(); // Recargar la tabla
+                    loadAllMedicamentos();
                 } else {
                     JOptionPane.showMessageDialog(this, "No se pudo eliminar el medicamento. Puede que esté en uso o no exista.", "Error", JOptionPane.ERROR_MESSAGE);
                 }

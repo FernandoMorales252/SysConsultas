@@ -35,6 +35,10 @@ public class PacienteReadingForm extends JDialog {
         cargarTabla("");
     }
 
+    /**
+     * Inicializa los componentes de la interfaz de usuario.
+     * Configura el diseño, colores, fuentes y eventos de los botones.
+     */
     private void initComponents() {
         // Colores y fuentes
         Color fondo = new Color(240, 245, 250);
@@ -81,6 +85,15 @@ public class PacienteReadingForm extends JDialog {
         btnEliminar.addActionListener(e -> eliminarPaciente());
     }
 
+    /**
+     * Crea un botón con un texto, color de fondo y color de hover.
+     * Configura el estilo del botón y agrega un efecto hover.
+     *
+     * @param texto El texto del botón.
+     * @param fondo El color de fondo del botón.
+     * @param hover El color de fondo al pasar el mouse por encima.
+     * @return Un JButton configurado.
+     */
     private JButton crearBoton(String texto, Color fondo, Color hover) {
         JButton boton = new JButton(texto);
         boton.setFocusPainted(false);
@@ -100,6 +113,12 @@ public class PacienteReadingForm extends JDialog {
         return boton;
     }
 
+    /**
+     * Carga la tabla de pacientes desde la base de datos.
+     * Si se proporciona un filtro, busca pacientes que coincidan con el filtro.
+     * Si no hay filtro, carga todos los pacientes.
+     * Actualiza el modelo de la tabla con los datos obtenidos.
+     */
     private void cargarTabla(String filtro) {
         try {
             ArrayList<Paciente> lista = filtro.isEmpty()
@@ -128,6 +147,11 @@ public class PacienteReadingForm extends JDialog {
         }
     }
 
+    /**
+     * Crea un nuevo paciente a través de un formulario.
+     * Si el formulario se completa correctamente, guarda el paciente en la base de datos
+     * y actualiza la tabla de pacientes.
+     */
     private void crearPaciente() {
         PacienteWriteForm form = new PacienteWriteForm(this);
         form.limpiarCampos();
@@ -151,6 +175,13 @@ public class PacienteReadingForm extends JDialog {
         }
     }
 
+
+/**
+     * Modifica el paciente seleccionado en la tabla.
+     * Si no hay un paciente seleccionado, muestra un mensaje de advertencia.
+     * Si se selecciona un paciente, abre un formulario para editar sus datos.
+     * Después de modificar, actualiza la tabla y muestra un mensaje de éxito.
+     */
     private void modificarPaciente() {
         int fila = tbPacientes.getSelectedRow();
         if (fila == -1) {
@@ -190,7 +221,9 @@ public class PacienteReadingForm extends JDialog {
         }
     }
 
-    // Aquí está la modificación en el método eliminarPaciente()
+   /**
+     * Elimina el paciente seleccionado después de confirmar la acción.
+     */
     private void eliminarPaciente() {
         int fila = tbPacientes.getSelectedRow();
         if (fila == -1) {

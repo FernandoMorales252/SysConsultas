@@ -25,13 +25,12 @@ public class MainForm extends JFrame{
         setTitle("Sistema en Java de Escritorio");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-
         initUI(); // Crear contenido visual
         createMenu(); // Crear menú
     }
 
+
     private void initUI() {
-        // Crear panel principal
         mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(Color.WHITE);
 
@@ -47,18 +46,16 @@ public class MainForm extends JFrame{
         bannerLabel.setBackground(new Color(240, 248, 255));
         bannerLabel.setOpaque(true);
 
-
-
         // Agregar componentes al panel principal
         mainPanel.add(bannerLabel, BorderLayout.NORTH);
-        setContentPane(mainPanel); // Establece el panel como contenido de la ventana
-        setLocationRelativeTo(null); // Centrado
+        setContentPane(mainPanel);
+        setLocationRelativeTo(null);
     }
+
 
     private void createMenu() {
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-
         // Menú Perfil
         JMenu menuPerfil = new JMenu("Perfil");
         menuBar.add(menuPerfil);
@@ -93,14 +90,13 @@ public class MainForm extends JFrame{
         });
 
         //Menu de "Doctores"
-        JMenu menuDoctores = new JMenu("Doctores"); // Crea un nuevo menú llamado "Doctores".
-        menuBar.add(menuDoctores); // Agrega el menú "Doctores" a la barra de menú.
-
-        JMenuItem itemDoctores = new JMenuItem("Doctores"); // Crea un nuevo elemento de menú llamado "Doctores".
-        menuDoctores.add(itemDoctores); // Agrega el elemento "Doctores" al menú "Doctores".
+        JMenu menuDoctores = new JMenu("Doctores");
+        menuBar.add(menuDoctores);
+        JMenuItem itemDoctores = new JMenuItem("Doctores");
+        menuDoctores.add(itemDoctores);
         itemDoctores.addActionListener(e -> {
-            DoctorReadingForm doctorReadingForm = new DoctorReadingForm(this); // Cuando se hace clic, crea una nueva instancia de DoctorReadingForm (formulario para leer/listar doctores), pasándole la instancia actual de MainForm como padre.
-            doctorReadingForm.setVisible(true); // Hace visible el formulario de lectura de doctores.
+            DoctorReadingForm doctorReadingForm = new DoctorReadingForm(this);
+            doctorReadingForm.setVisible(true);
         });
 
         // Menú "Pacientes"

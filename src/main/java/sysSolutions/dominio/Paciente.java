@@ -1,5 +1,6 @@
 package sysSolutions.dominio;
 
+//clase que representa un paciente en el sistema de gestión de citas médicas.
 public class Paciente {
 
     private int id;

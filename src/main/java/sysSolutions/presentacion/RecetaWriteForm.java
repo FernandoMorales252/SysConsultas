@@ -14,10 +14,6 @@ import java.util.List;
 import javax.swing.JTextField;
 
 
-
-
-
-
 public class RecetaWriteForm extends JDialog {
     private boolean saved = false; // Indica si la operación de guardar/actualizar fue exitosa
 
@@ -35,12 +31,7 @@ public class RecetaWriteForm extends JDialog {
     private final MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
     private final CitaDAO citaDAO = new CitaDAO();
 
-    /**
-     * Constructor para el formulario de escritura de recetas.
-     *
-     * @param parent La ventana padre (JDialog, como RecetaReadingForm) desde donde se llama a este formulario.
-     * @param receta La instancia de Receta a editar. Si es null, se asume que es una nueva receta.
-     */
+ // Constructor para el formulario de escritura de recetas
     public RecetaWriteForm(JDialog parent, Receta receta) { // ADAPTACIÓN: Cambiado de Dialog a JDialog para ser como DoctorWriteForm
         super(parent, true); // true para hacerlo modal
         this.receta = receta;
@@ -65,22 +56,20 @@ public class RecetaWriteForm extends JDialog {
         }
     }
 
-    /**
-     * Inicializa y configura todos los componentes de la interfaz de usuario,
-     * incluyendo el diseño, etiquetas, campos, y botones.
-     */
+
+    // inicializa y configura todos los componentes de la interfaz de usuario,
     private void initComponents() {
         // Configuración del título con estilo similar al DoctorWriteForm
         lblTitulo = new JLabel(receta == null ? "Agregar nueva receta" : "Editar receta", JLabel.CENTER);
         lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        lblTitulo.setForeground(new Color(33, 97, 140)); // Azul hospital
+        lblTitulo.setForeground(new Color(33, 97, 140));
 
         // Inicialización de campos de entrada
         cbCitaID = new JComboBox<>();
         cbMedicamento = new JComboBox<>();
-        txtIndicaciones = new JTextField(20); // Campo de dosis
-        txtObservaciones = new JTextField(20); // ADAPTACIÓN: Ahora es JTextField, no JTextArea
-        // Ya NO se usan txtObservaciones.setLineWrap(true); y txtObservaciones.setWrapStyleWord(true);
+        txtIndicaciones = new JTextField(20);
+        txtObservaciones = new JTextField(20);
+
 
         // Configuración y estilo de los botones
         btnGuardar = new JButton(receta == null ? "Guardar" : "Actualizar");
@@ -130,7 +119,7 @@ public class RecetaWriteForm extends JDialog {
         panelCampos.add(lblDosis);
         panelCampos.add(txtIndicaciones);
         panelCampos.add(lblObservaciones);
-        panelCampos.add(txtObservaciones); // ADAPTACIÓN: Añadir el JTextField directamente
+        panelCampos.add(txtObservaciones);
 
         // Panel para los botones, alineados a la derecha
         JPanel panelBotones = new JPanel();
@@ -141,36 +130,25 @@ public class RecetaWriteForm extends JDialog {
         panelBotones.add(btnCancelar);
         panelBotones.add(btnGuardar);
 
-        // Configurar el contentPane principal del JDialog
-        // Mantuve 'contentPane' como variable, pero se usa directamente para setContentPane
-        // tal como en tu DoctorWriteForm tienes 'setLayout(new BorderLayout());' y luego 'add(titulo, BorderLayout.NORTH);'
-        // Esto es una forma de hacerlo en JDialog, estableciendo el layout del propio diálogo.
+        // Añadir componentes al JDialog
         setLayout(new BorderLayout());
-        getContentPane().setBackground(Color.WHITE); // Fondo blanco para el diálogo
+        getContentPane().setBackground(Color.WHITE);
 
         add(lblTitulo, BorderLayout.NORTH);
         add(panelCampos, BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);
     }
 
-    /**
-     * Carga las citas disponibles desde la base de datos y las añade al JComboBox de Citas.
-     *
-     * @throws SQLException Si ocurre un error al acceder a la base de datos.
-     */
+    // Carga las citas disponibles desde la base de datos y las añade al JComboBox de Citas.
     private void loadCitas() throws SQLException {
-        List<Cita> citas = citaDAO.getAll(); // Usando tu CitaDAO real
+        List<Cita> citas = citaDAO.getAll();
         cbCitaID.removeAllItems();
         for (Cita cita : citas) {
             cbCitaID.addItem(cita);
         }
     }
 
-    /**
-     * Carga los medicamentos disponibles desde la base de datos y los añade al JComboBox de Medicamentos.
-     *
-     * @throws SQLException Si ocurre un error al acceder a la base de datos.
-     */
+   // Carga los medicamentos disponibles desde la base de datos y los añade al JComboBox de Medicamentos.
     private void loadMedicamentos() throws SQLException {
         List<Medicamento> medicamentos = medicamentoDAO.getAll(); // Usando tu MedicamentoDAO real
         cbMedicamento.removeAllItems();
@@ -179,10 +157,7 @@ public class RecetaWriteForm extends JDialog {
         }
     }
 
-    /**
-     * Precarga los datos de la receta existente en los campos del formulario
-     * cuando el formulario se abre en modo de edición.
-     */
+   // Precarga los datos de una receta existente en los campos del formulario
     private void loadRecetaData() {
         // Seleccionar la Cita en el JComboBox
         for (int i = 0; i < cbCitaID.getItemCount(); i++) {
@@ -206,12 +181,7 @@ public class RecetaWriteForm extends JDialog {
         txtObservaciones.setText(receta.getObservaciones());
     }
 
-    /**
-     * Maneja el evento de guardar o actualizar la receta en la base de datos.
-     * Realiza validaciones y llama al DAO correspondiente.
-     *
-     * @param e El evento de acción.
-     */
+   // Maneja el evento de guardar o actualizar la receta en la base de datos.
     private void onGuardar(ActionEvent e) {
         // Obtener los valores de los campos
         Cita selectedCita = (Cita) cbCitaID.getSelectedItem();
@@ -246,7 +216,7 @@ public class RecetaWriteForm extends JDialog {
         }
 
         try {
-            if (receta == null) { // Modo de creación: crear una nueva receta
+            if (receta == null) {
                 Receta nuevaReceta = new Receta();
                 nuevaReceta.setCitaId(selectedCita.getId());
                 nuevaReceta.setMedicamento(selectedMedicamento);
@@ -256,12 +226,12 @@ public class RecetaWriteForm extends JDialog {
                 Receta creada = recetaDAO.create(nuevaReceta);
                 if (creada != null) {
                     JOptionPane.showMessageDialog(this, "Receta creada con éxito. ID: " + creada.getId());
-                    saved = true; // Marca la operación como exitosa
-                    limpiarCampos(); // Limpia para otra posible entrada
+                    saved = true;
+                    limpiarCampos();
                 } else {
                     JOptionPane.showMessageDialog(this, "Error al crear la receta.");
                 }
-            } else { // Modo de edición: actualizar la receta existente
+            } else {
                 receta.setCitaId(selectedCita.getId());
                 receta.setMedicamento(selectedMedicamento);
                 receta.setDosis(dosis);
@@ -270,8 +240,8 @@ public class RecetaWriteForm extends JDialog {
                 boolean actualizado = recetaDAO.update(receta);
                 if (actualizado) {
                     JOptionPane.showMessageDialog(this, "Receta actualizada con éxito.");
-                    saved = true; // Marca la operación como exitosa
-                    dispose(); // Cierra el diálogo después de la actualización exitosa
+                    saved = true;
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "No se encontró la receta para actualizar o no hubo cambios.");
                 }
@@ -280,29 +250,26 @@ public class RecetaWriteForm extends JDialog {
             JOptionPane.showMessageDialog(this, "Error al guardar la receta: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
-        } catch (IllegalArgumentException ex) { // Captura validaciones del dominio
+        } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de Validación", JOptionPane.WARNING_MESSAGE);
         }
     }
 
-    /**
-     * Limpia todos los campos del formulario.
-     */
+
+    // Limpia los campos del formulario para permitir una nueva entrada
     private void limpiarCampos() {
         cbCitaID.setSelectedIndex(-1);
         cbMedicamento.setSelectedIndex(-1);
         txtIndicaciones.setText("");
         txtObservaciones.setText("");
         cbCitaID.requestFocus();
-        this.receta = null; // Restablecer para el modo de creación
+        this.receta = null;
         setTitle("Nueva Receta");
         lblTitulo.setText("Agregar nueva receta");
         btnGuardar.setText("Guardar");
     }
 
-    /**
-     * @return true si la operación de guardar/actualizar fue exitosa, false en caso contrario.
-     */
+    // Método público para saber si se guardó la receta o no
     public boolean isSaved() {
         return saved;
     }
